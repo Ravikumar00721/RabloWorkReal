@@ -1,43 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Component2 extends StatelessWidget {
+class Component2 extends StatefulWidget {
   const Component2({Key? key}) : super(key: key);
+
+  @override
+  _Component2State createState() => _Component2State();
+}
+
+class _Component2State extends State<Component2> {
+  List<bool> isEnabled = [false, false, false, false];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 344, // Outer container width
-      height: 78, // Outer container height
+      width: 344,
+      height: 78,
       decoration: BoxDecoration(
-        color: const Color(0xFF2F5B6C), // Dark Primary Blue background color
-        borderRadius: BorderRadius.circular(15), // Rounded corners with 15px radius
+        color: const Color(0xFF2F5B6C),
+        borderRadius: BorderRadius.circular(15),
       ),
       child: Container(
-        width: 328, // Inner container width
-        height: 46, // Inner container height
+        width: 328,
+        height: 46,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Item 1
               _buildItem(
+                index: 0,
                 icon: 'assets/locked.svg',
                 text: 'My Website',
               ),
-              // Item 2
               _buildItem(
+                index: 1,
                 icon: 'assets/exchange.svg',
                 text: 'My Transactions',
               ),
-              // Item 3
               _buildItem(
+                index: 2,
                 icon: 'assets/locked.svg',
                 text: 'Membership',
               ),
-              // Item 4
               _buildItem(
+                index: 3,
                 icon: 'assets/locked.svg',
                 text: 'Members',
               ),
@@ -48,46 +55,53 @@ class Component2 extends StatelessWidget {
     );
   }
 
-  Widget _buildItem({required String icon, required String text}) {
-    return Container(
-      width: 70, // Width for each icon and text container
-      height: 46, // Height
-      decoration: BoxDecoration(
-        color: const Color(0xFF2F5B6C), // Dark Primary Blue background color
-        borderRadius: BorderRadius.circular(8), // Border radius
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 32, // Width for the icon container
-            height: 32, // Height of the icon container
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1), // Icon background color
-              borderRadius: BorderRadius.circular(8),
+  Widget _buildItem({required int index, required String icon, required String text}) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isEnabled[index] = !isEnabled[index];
+        });
+      },
+      child: Container(
+        width: 70,
+        height: 46,
+        decoration: BoxDecoration(
+          color: const Color(0xFF2F5B6C),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 32,
+              height: 32,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: SvgPicture.asset(
+                icon,
+                width: 16,
+                height: 16,
+                color: isEnabled[index] ? Colors.white : Colors.grey,
+              ),
             ),
-            child: SvgPicture.asset(
-              icon,
-              width: 16, // Icon width
-              height: 16, // Icon height
-              color: Colors.white, // Icon color
+            const SizedBox(height: 2),
+            Text(
+              text,
+              style: const TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w500,
+                fontSize: 8,
+                height: 1.5,
+                color: Colors.white,
+                decoration: TextDecoration.none,
+              ),
+              textAlign: TextAlign.center,
             ),
-          ),
-          const SizedBox(height: 2), // Gap between icon and text
-          Text(
-            text,
-            style: const TextStyle(
-              fontFamily: 'Poppins', // Font family
-              fontWeight: FontWeight.w500, // Font weight
-              fontSize: 8, // Font size
-              height: 1.5, // Line height
-              color: Colors.white, // Text color
-              decoration: TextDecoration.none, // Text decoration (no underline)
-            ),
-            textAlign: TextAlign.center, // Text alignment to center
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -8,17 +8,17 @@ class Component3 extends StatelessWidget {
       children: [
         const SizedBox(height: 10),
         Container(
-          width: 344, // Width of the divider
-          height: 2, // Height of the divider (just a line)
+          width: 344,
+          height: 2,
           decoration: BoxDecoration(
-            color: const Color(0xFF2F5B6C), // Primary Blue (Dark) color
+            color: const Color(0xFF2F5B6C),
             border: Border.all(
-              color: const Color(0xFF2F5B6C), // Border color
-              width: 2, // Border width
+              color: const Color(0xFF2F5B6C),
+              width: 2,
             ),
           ),
         ),
-        const SizedBox(height: 30), // Gap between containers
+        const SizedBox(height: 10),
 
         Container(
           width: 344,
@@ -35,7 +35,7 @@ class Component3 extends StatelessWidget {
                     color: const Color(0x1AFFFFFF),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: const Color(0xFF666666), // Dashed border color
+                      color: const Color(0xFF666666),
                       width: 2,
                     ),
                   ),
@@ -56,7 +56,7 @@ class Component3 extends StatelessWidget {
                     color: const Color(0x1AFFFFFF),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: const Color(0xFF666666), // Dashed border color
+                      color: const Color(0xFF666666),
                       width: 2,
                     ),
                   ),

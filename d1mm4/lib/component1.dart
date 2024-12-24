@@ -1,22 +1,12 @@
-// lib/component1.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'home_controller.dart';
 
 class CustomCard extends StatelessWidget {
-  final int currentStep;
-  final List<int> stepProgress;
-  final List<String> stepIcons;
-  final List<String> stepTexts;
-  final Function(int) onStepChange;
+  final HomeController controller;
 
-  const CustomCard({
-    Key? key,
-    required this.currentStep,
-    required this.stepProgress,
-    required this.stepIcons,
-    required this.stepTexts,
-    required this.onStepChange,
-  }) : super(key: key);
+  const CustomCard({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,21 +26,28 @@ class CustomCard extends StatelessWidget {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'Welcome Back!',
                     style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
                       color: Colors.white,
-                      fontFamily: 'Roboto',
+                      fontFamily: 'Barlow Semi Condensed',
                       fontStyle: FontStyle.italic,
+                      height: 1.2, 
                     ),
                   ),
-                  SizedBox(height: 3),
+                  const SizedBox(height: 3),
                   Text(
                     'You are One-Step Closer to creating your App',
-                    style: TextStyle(fontSize: 14, color: Colors.white),
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
+                      fontFamily: 'Poppins',
+                      height: 1.5, 
+                    ),
                   ),
                 ],
               ),
@@ -65,25 +62,24 @@ class CustomCard extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  onStepChange(index);
                                 },
-                                child: Column(
+                                child: Obx(() => Column(
                                   children: [
                                     CircleAvatar(
-                                      backgroundColor: currentStep >= index
+                                      backgroundColor: controller.currentStep.value >= index
                                           ? const Color.fromRGBO(184, 254, 34, 1)
                                           : Colors.grey,
                                       child: SvgPicture.asset(
-                                        stepIcons[index],
+                                        'assets/step${index + 1}.svg',
                                         width: 14,
                                         height: 14,
-                                        color: currentStep >= index
+                                        color: controller.currentStep.value >= index
                                             ? const Color(0xFF003366)
                                             : Colors.white,
                                       ),
                                     ),
                                   ],
-                                ),
+                                )),
                               ),
                               if (index < 4)
                                 Container(
@@ -91,7 +87,7 @@ class CustomCard extends StatelessWidget {
                                   child: Container(
                                     width: 8,
                                     height: 6,
-                                    color: currentStep > index
+                                    color: controller.currentStep.value > index
                                         ? const Color.fromRGBO(184, 254, 34, 1)
                                         : Colors.grey,
                                   ),
@@ -104,35 +100,42 @@ class CustomCard extends StatelessWidget {
                         '|',
                         style: TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
+                          fontSize: 30,
                         ),
                       ),
-                      Text(
-                        '${stepProgress[currentStep]}%',
+                      Obx(() => Text(
+                        '${controller.currentPercentage}%',
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
                         ),
-                      ),
+                      )),
                     ],
                   ),
                 ],
               ),
+        
               ElevatedButton(
                 onPressed: () {
-                  if (currentStep < 4) {
-                    onStepChange(currentStep + 1);
+                  if (controller.currentStep.value < 4) {
+                    controller.changeStep(controller.currentStep.value + 1);
                   }
                 },
-                child: Text(
-                  stepTexts[currentStep],
-                  style: const TextStyle(fontSize: 18),
-                ),
+                child: Obx(() => Text(
+                  controller.currentButtonText,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    height: 1.5,
+                    color: const Color(0xFF121212),
+                  ),
+                )),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
-                    const Color.fromRGBO(184, 254, 34, 1),
+                    controller.currentStep.value == 4
+                        ? const Color.fromRGBO(184, 254, 34, 1) 
+                        : const Color.fromRGBO(184, 254, 34, 1), 
                   ),
                   minimumSize: MaterialStateProperty.all(const Size(320, 30)),
                   padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 8)),

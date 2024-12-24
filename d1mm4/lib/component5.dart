@@ -4,77 +4,80 @@ import 'package:flutter_svg/flutter_svg.dart';
 class Component5 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 304, // Reduced width by 20px (344px - 20px = 304px)
-          height: 2, // Height of the divider (just a line)
-          decoration: BoxDecoration(
-            color: const Color(0xFF2F5B6C), // Primary Blue (Dark) color
-            border: Border.all(
-              color: const Color(0xFF2F5B6C), // Border color
-              width: 2, // Border width
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Column(
+        children: [
+          Container(
+            width: 304,
+            height: 2,
+            decoration: BoxDecoration(
+              color: const Color(0xFF2F5B6C),
+              border: Border.all(
+                color: const Color(0xFF2F5B6C),
+                width: 2,
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 30), // Gap between containers
-        Stack(
-          clipBehavior: Clip.none, // Ensures elements outside are visible
-          children: [
-            Container(
-              width: 280, // Fixed width
-              height: 50, // Height
-              decoration: BoxDecoration(
-                color: const Color(0xFF2F5B6C), // Background color
-                borderRadius: BorderRadius.circular(15), // Rounded corners
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 40), // Padding left and right
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SvgPicture.asset(
-                    'assets/homeyes.svg',
-                    width: 24,
-                    height: 24,
-                    color: const Color.fromRGBO(184, 254, 34, 1), // Updated color
-                  ),
-                  const SizedBox(width: 24), // Placeholder for the middle icon
-                  SvgPicture.asset(
-                    'assets/personno.svg',
-                    width: 24,
-                    height: 24,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: -20, // Adjusted to align the circular boundary
-              left: 120, // Centers the icon horizontally
-              child: Container(
-                width: 50, // Size of the circular boundary
+          const SizedBox(height: 45),
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Container(
+                width: 280,
                 height: 50,
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: const Color(0xFF2F5B6C), // Blue boundary color
-                    width: 3, // Thickness of the boundary
-                  ),
-                  color: const Color(0xFF063434), // Background color
+                  color: const Color(0xFF2F5B6C),
+                  borderRadius: BorderRadius.circular(15),
                 ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    'assets/icon.svg',
-                    width: 24,
-                    height: 24,
-                    color: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/homeyes.svg',
+                      width: 24,
+                      height: 24,
+                      color: const Color.fromRGBO(184, 254, 34, 1),
+                    ),
+                    const SizedBox(width: 24),
+                    SvgPicture.asset(
+                      'assets/personno.svg',
+                      width: 24,
+                      height: 24,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                top: -20,
+                left: 120,
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: const Color(0xFF2F5B6C),
+                      width: 3,
+                    ),
+                    color: const Color(0xFF063434),
+                  ),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      'assets/icon.svg',
+                      width: 24,
+                      height: 24,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
