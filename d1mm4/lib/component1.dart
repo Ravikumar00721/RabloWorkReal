@@ -62,6 +62,7 @@ class CustomCard extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
+                                  // Step change is handled only by the button press, not the icon.
                                 },
                                 child: Obx(() => Column(
                                   children: [
@@ -82,7 +83,7 @@ class CustomCard extends StatelessWidget {
                                 )),
                               ),
                               if (index < 4)
-                                Container(
+                                Obx(() => Container(
                                   alignment: Alignment.center,
                                   child: Container(
                                     width: 8,
@@ -91,7 +92,7 @@ class CustomCard extends StatelessWidget {
                                         ? const Color.fromRGBO(184, 254, 34, 1)
                                         : Colors.grey,
                                   ),
-                                ),
+                                )),
                             ],
                           );
                         }),
