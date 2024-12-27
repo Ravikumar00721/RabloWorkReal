@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+//Bottom Bar
 class Component5 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

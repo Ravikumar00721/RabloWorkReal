@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+// Container 1 which contains 4 icons
 class Component2 extends StatefulWidget {
   const Component2({Key? key}) : super(key: key);
 
@@ -13,49 +14,51 @@ class _Component2State extends State<Component2> {
 
   @override
   Widget build(BuildContext context) {
+    // Get the device's width
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double deviceHeight = MediaQuery.of(context).size.height;
+
     return Container(
-      width: 344,
-      height: 78,
+      width: deviceWidth * 0.9, // 90% of the screen width
+      height: deviceHeight * 0.1, // 10% of the screen height
       decoration: BoxDecoration(
         color: const Color(0xFF2F5B6C),
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Container(
-        width: 328,
-        height: 46,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildItem(
-                index: 0,
-                icon: 'assets/locked.svg',
-                text: 'My Website',
-              ),
-              _buildItem(
-                index: 1,
-                icon: 'assets/exchange.svg',
-                text: 'My Transactions',
-              ),
-              _buildItem(
-                index: 2,
-                icon: 'assets/locked.svg',
-                text: 'Membership',
-              ),
-              _buildItem(
-                index: 3,
-                icon: 'assets/locked.svg',
-                text: 'Members',
-              ),
-            ],
-          ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _buildItem(
+              index: 0,
+              icon: 'assets/locked.svg',
+              text: 'My Website',
+            ),
+            _buildItem(
+              index: 1,
+              icon: 'assets/exchange.svg',
+              text: 'My Transactions',
+            ),
+            _buildItem(
+              index: 2,
+              icon: 'assets/locked.svg',
+              text: 'Membership',
+            ),
+            _buildItem(
+              index: 3,
+              icon: 'assets/locked.svg',
+              text: 'Members',
+            ),
+          ],
         ),
       ),
     );
   }
 
   Widget _buildItem({required int index, required String icon, required String text}) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
+
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -63,7 +66,7 @@ class _Component2State extends State<Component2> {
         });
       },
       child: Container(
-        width: 70,
+        width: deviceWidth * 0.2, // Each item takes 20% of the screen width
         height: 46,
         decoration: BoxDecoration(
           color: const Color(0xFF2F5B6C),

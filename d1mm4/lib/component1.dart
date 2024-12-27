@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'home_controller.dart';
 
+//CARD
 class CustomCard extends StatelessWidget {
   final HomeController controller;
 
@@ -10,14 +11,18 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the device's width and height
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double deviceHeight = MediaQuery.of(context).size.height;
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
       color: const Color(0xFF2F5B6C),
       child: SizedBox(
-        width: 344,
-        height: 199,
+        width: deviceWidth * 0.9, // Use 90% of device width
+        height: deviceHeight * 0.25, // Use 25% of device height
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -35,7 +40,7 @@ class CustomCard extends StatelessWidget {
                       color: Colors.white,
                       fontFamily: 'Barlow Semi Condensed',
                       fontStyle: FontStyle.italic,
-                      height: 1.2, 
+                      height: 1.2,
                     ),
                   ),
                   const SizedBox(height: 3),
@@ -46,7 +51,7 @@ class CustomCard extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       color: Colors.white,
                       fontFamily: 'Poppins',
-                      height: 1.5, 
+                      height: 1.5,
                     ),
                   ),
                 ],
@@ -61,9 +66,7 @@ class CustomCard extends StatelessWidget {
                           return Row(
                             children: [
                               GestureDetector(
-                                onTap: () {
-                                  // Step change is handled only by the button press, not the icon.
-                                },
+                                onTap: () {},
                                 child: Obx(() => Column(
                                   children: [
                                     CircleAvatar(
@@ -116,7 +119,6 @@ class CustomCard extends StatelessWidget {
                   ),
                 ],
               ),
-        
               ElevatedButton(
                 onPressed: () {
                   if (controller.currentStep.value < 4) {
@@ -135,10 +137,10 @@ class CustomCard extends StatelessWidget {
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
                     controller.currentStep.value == 4
-                        ? const Color.fromRGBO(184, 254, 34, 1) 
-                        : const Color.fromRGBO(184, 254, 34, 1), 
+                        ? const Color.fromRGBO(184, 254, 34, 1)
+                        : const Color.fromRGBO(184, 254, 34, 1),
                   ),
-                  minimumSize: MaterialStateProperty.all(const Size(320, 30)),
+                  minimumSize: MaterialStateProperty.all(Size(deviceWidth * 0.85, deviceHeight * 0.05)), // Responsive size
                   padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 8)),
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
