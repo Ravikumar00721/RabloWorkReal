@@ -56,6 +56,7 @@ class _Component2State extends State<Component2> {
     );
   }
 
+
   Widget _buildItem({required int index, required String icon, required String text}) {
     final double deviceWidth = MediaQuery.of(context).size.width;
 
