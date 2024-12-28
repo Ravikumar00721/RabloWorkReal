@@ -69,34 +69,42 @@ class CustomCard extends StatelessWidget {
                                   controller.changeStep(index);
                                 },
                                 child: Obx(() => Column(
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor: controller.currentStep.value >= index
-                                          ? const Color.fromRGBO(184, 254, 34, 1)
-                                          : Colors.grey,
-                                      child: SvgPicture.asset(
-                                        'assets/step${index + 1}.svg',
-                                        width: 14,
-                                        height: 14,
-                                        color: controller.currentStep.value >= index
-                                            ? const Color(0xFF003366)
-                                            : Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                )),
+                                      children: [
+                                        CircleAvatar(
+                                          backgroundColor:
+                                              controller.currentStep.value >=
+                                                      index
+                                                  ? const Color.fromRGBO(
+                                                      184, 254, 34, 1)
+                                                  : Colors.grey,
+                                          child: SvgPicture.asset(
+                                            'assets/step${index + 1}.svg',
+                                            width: 14,
+                                            height: 14,
+                                            color:
+                                                controller.currentStep.value >=
+                                                        index
+                                                    ? const Color(0xFF003366)
+                                                    : Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    )),
                               ),
                               if (index < 2) // Adjust connector for 3 steps
                                 Obx(() => Container(
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                    width: deviceWidth * 0.15, // Dynamic line width for 3 steps
-                                    height: 6,
-                                    color: controller.currentStep.value > index
-                                        ? const Color.fromRGBO(184, 254, 34, 1)
-                                        : Colors.grey,
-                                  ),
-                                )),
+                                      alignment: Alignment.center,
+                                      child: Container(
+                                        width: deviceWidth *
+                                            0.15, // Dynamic line width for 3 steps
+                                        height: 6,
+                                        color:
+                                            controller.currentStep.value > index
+                                                ? const Color.fromRGBO(
+                                                    184, 254, 34, 1)
+                                                : Colors.grey,
+                                      ),
+                                    )),
                             ],
                           );
                         }),
@@ -109,13 +117,13 @@ class CustomCard extends StatelessWidget {
                         ),
                       ),
                       Obx(() => Text(
-                        '${controller.currentPercentage}%',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
-                      )),
+                            '${controller.currentPercentage}%',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                            ),
+                          )),
                     ],
                   ),
                 ],
@@ -135,14 +143,14 @@ class CustomCard extends StatelessWidget {
                   ),
                 ),
                 child: Obx(() => Text(
-                  controller.currentButtonText,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    height: 1.5,
-                    color: Color(0xFF121212),
-                  ),
-                )),
+                      controller.currentButtonText,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        height: 1.5,
+                        color: Color(0xFF121212),
+                      ),
+                    )),
               ),
             ],
           ),

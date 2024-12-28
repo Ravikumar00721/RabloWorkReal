@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'D1MM4',
+      title: 'D1CM5',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
