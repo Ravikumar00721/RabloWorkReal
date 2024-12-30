@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'home_controller.dart';
-import 'component1.dart';
-import 'component2.dart';
-import 'component3.dart';
-import 'component4.dart';
-import 'component5.dart';
+import 'welcomebox.dart';
+import 'accessiblitybox.dart';
+import 'quickinfo.dart';
+import 'horizontalinforbox.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
                   Component3(),
                   const SizedBox(height: 10),
                   Component4(),
-                  Component5(),
+              
                 ],
               ),
             ),

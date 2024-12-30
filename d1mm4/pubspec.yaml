@@ -74,6 +74,8 @@ flutter:
     - assets/homeyes.svg
     - assets/personno.svg
     - assets/icon.svg
+    - assets/QuickInfo.svg
+    - assets/HorizontalInforBox.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
