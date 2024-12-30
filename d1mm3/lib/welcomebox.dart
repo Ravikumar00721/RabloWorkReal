@@ -64,33 +64,28 @@ class CustomCard extends StatelessWidget {
                         children: List.generate(3, (index) {
                           return Row(
                             children: [
-                              GestureDetector(
-                                onTap: () {
-                                  controller.changeStep(index);
-                                },
-                                child: Obx(() => Column(
-                                      children: [
-                                        CircleAvatar(
-                                          backgroundColor:
-                                              controller.currentStep.value >=
-                                                      index
-                                                  ? const Color.fromRGBO(
-                                                      184, 254, 34, 1)
-                                                  : Colors.grey,
-                                          child: SvgPicture.asset(
-                                            'assets/step${index + 1}.svg',
-                                            width: 14,
-                                            height: 14,
-                                            color:
-                                                controller.currentStep.value >=
-                                                        index
-                                                    ? const Color(0xFF003366)
-                                                    : Colors.white,
-                                          ),
+                              // Remove GestureDetector to prevent changing step on icon click
+                              Obx(() => Column(
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundColor:
+                                            controller.currentStep.value >=
+                                                    index
+                                                ? const Color.fromRGBO(
+                                                    184, 254, 34, 1)
+                                                : Colors.grey,
+                                        child: SvgPicture.asset(
+                                          'assets/step${index + 1}.svg',
+                                          width: 14,
+                                          height: 14,
+                                          color: controller.currentStep.value >=
+                                                  index
+                                              ? const Color(0xFF003366)
+                                              : Colors.white,
                                         ),
-                                      ],
-                                    )),
-                              ),
+                                      ),
+                                    ],
+                                  )),
                               if (index < 2) // Adjust connector for 3 steps
                                 Obx(() => Container(
                                       alignment: Alignment.center,
@@ -130,6 +125,7 @@ class CustomCard extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
+                  // Only move to next step when the button is clicked
                   if (controller.currentStep.value < 2) {
                     controller.changeStep(controller.currentStep.value + 1);
                   }
