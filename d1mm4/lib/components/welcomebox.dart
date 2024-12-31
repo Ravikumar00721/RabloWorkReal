@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'home_controller.dart';
+import '../controllers/card_controller.dart';
 
 //CARD
 class CustomCard extends StatelessWidget {
-  final HomeController controller;
+  final CardController controller;
 
   const CustomCard({Key? key, required this.controller}) : super(key: key);
 

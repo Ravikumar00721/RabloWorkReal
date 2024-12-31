@@ -1,20 +1,18 @@
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
+class CardController extends GetxController {
   // Observables for step data
   var currentStep = 0.obs;
-  var stepProgress = [20, 40, 60, 80, 100].obs;
+  var stepProgress = [20, 60, 100].obs; // Updated progress percentages
   var stepTexts = [
-    "Complete your profile",
-    "Verify yourself",
-    "Complete verification",
-    "Create your plan",
-    "Create website"
-  ].obs;
+    "Connect Your Buisness",
+    "Join The Membership",
+    "Scan Your First Session"
+  ].obs; // Updated steps for 3 stages
 
   // Method to change step
   void changeStep(int step) {
-    if (step >= 0 && step <= 4) {
+    if (step >= 0 && step <= 2) { // Adjusted for 3 steps
       currentStep.value = step;
     }
   }

@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'home_controller.dart';
-import 'welcomebox.dart';
-import 'accessiblitybox.dart';
-import 'quickinfo.dart';
-import 'horizontalinforbox.dart';
+import 'controllers/card_controller.dart';
+import 'components/welcomebox.dart';
+import 'components/accessiblitybox.dart';
+import 'components/quickinfo.dart';
+import 'components/horizontalinforbox.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
+    final controller = Get.put(CardController());
 
     return Scaffold(
       body: Stack(
@@ -70,7 +70,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  const Component2(),
+                  Component2(),
                   Component3(),
                   const SizedBox(height: 10),
                   Component4(),                
