@@ -34,12 +34,13 @@ class CustomCard extends StatelessWidget {
                   Text(
                     'Welcome Back!',
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFFFFFFFF),
                       fontFamily: 'Barlow Semi Condensed',
                       fontStyle: FontStyle.italic,
-                      height: 1.2,
+                      letterSpacing: 1.5,
+                      // height: 1.2,
                     ),
                   ),
                   SizedBox(height: 3),
@@ -154,4 +155,4 @@ class CustomCard extends StatelessWidget {
       ),
     );
   }
-}
+}  
