@@ -95,7 +95,7 @@ flutter:
         - asset: fonts/Poppins-Medium.ttf
     - family: Barlow Semi Condensed
       fonts:
-        - asset: fonts/Barlow-Bold-Italic.ttf
+        - asset: fonts/BarlowSemiCondensed-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

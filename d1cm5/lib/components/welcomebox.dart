@@ -10,17 +10,17 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get the device's width and height
-    final double deviceWidth = MediaQuery.of(context).size.width;
+    // Get the device's height
     final double deviceHeight = MediaQuery.of(context).size.height;
 
     return Card(
+      margin: EdgeInsets.zero, // Removes default margin
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
       color: const Color(0xFF2F5B6C),
       child: SizedBox(
-        width: deviceWidth * 0.9, // Use 90% of device width
+        width: double.infinity, // Ensures full width
         height: deviceHeight * 0.25, // Use 25% of device height
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -40,7 +40,6 @@ class CustomCard extends StatelessWidget {
                       fontFamily: 'Barlow Semi Condensed',
                       fontStyle: FontStyle.italic,
                       letterSpacing: 1.5,
-                      // height: 1.2,
                     ),
                   ),
                   SizedBox(height: 3),
@@ -59,13 +58,11 @@ class CustomCard extends StatelessWidget {
               Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: List.generate(3, (index) {
                           return Row(
                             children: [
-                              // Remove GestureDetector to prevent changing step on icon click
                               Obx(() => Column(
                                     children: [
                                       CircleAvatar(
@@ -87,12 +84,11 @@ class CustomCard extends StatelessWidget {
                                       ),
                                     ],
                                   )),
-                              if (index < 2) // Adjust connector for 3 steps
-                                Obx(() => Container(
-                                      alignment: Alignment.center,
+                              if (index < 2)
+                                Obx(() => SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.18,
                                       child: Container(
-                                        width: deviceWidth *
-                                            0.15, // Dynamic line width for 3 steps
                                         height: 6,
                                         color:
                                             controller.currentStep.value > index
@@ -105,6 +101,7 @@ class CustomCard extends StatelessWidget {
                           );
                         }),
                       ),
+                      const SizedBox(width: 14),
                       const Text(
                         '|',
                         style: TextStyle(
@@ -112,12 +109,13 @@ class CustomCard extends StatelessWidget {
                           fontSize: 30,
                         ),
                       ),
+                      const SizedBox(width: 8),
                       Obx(() => Text(
                             '${controller.currentPercentage}%',
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 24,
+                              fontSize: 20,
                             ),
                           )),
                     ],
@@ -126,14 +124,13 @@ class CustomCard extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Only move to next step when the button is clicked
                   if (controller.currentStep.value < 2) {
                     controller.changeStep(controller.currentStep.value + 1);
                   }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(184, 254, 34, 1),
-                  minimumSize: Size(deviceWidth * 0.85, deviceHeight * 0.05),
+                  minimumSize: Size(double.infinity, deviceHeight * 0.05),
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -155,4 +152,4 @@ class CustomCard extends StatelessWidget {
       ),
     );
   }
-}  
+}

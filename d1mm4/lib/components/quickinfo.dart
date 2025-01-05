@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,7 +13,7 @@ class Component3 extends StatelessWidget {
 
     return Column(
       children: [
-        SizedBox(height: deviceHeight * 0.01), // 1% of screen height
+        SizedBox(height: 10), // 1% of screen height
         // Divider
         Container(
           width: deviceWidth * 0.9, // 90% of the screen width
@@ -25,7 +26,7 @@ class Component3 extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: deviceHeight * 0.01), // 1% of screen height
+        SizedBox(height: 8), // 1% of screen height
         // Parent Container
         Container(
           width: deviceWidth * 0.9, // 90% of the screen width
@@ -35,7 +36,7 @@ class Component3 extends StatelessWidget {
           ),
           child: Row(
             children: [
-              // First clickable SVG
+              // First clickable SVG with blur
               Expanded(
                 child: GestureDetector(
                   onTap: () {
@@ -43,19 +44,24 @@ class Component3 extends StatelessWidget {
                     print("First image clicked");
                   },
                   child: Container(
-                    margin: EdgeInsets.only(right: deviceWidth * 0.02), // 2% of screen width
                     child: Center(
-                      child: SvgPicture.asset(
-                        'assets/QuickInfo.svg',
-                        width: deviceWidth * 0.14, // Increased to 12% of screen width
-                        height: deviceHeight * 0.14, // Adjusted to 12% of screen height
+                      child: ClipRRect(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // Increased blur effect
+                          child: SvgPicture.asset(
+                            'assets/QuickInfo.svg',
+                            width: deviceWidth * 0.14, // Adjusted size
+                            height: deviceHeight * 0.14, // Adjusted size
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-
-              // Second clickable SVG
+              // Add spacing between the two images
+              SizedBox(width: 8), // Fixed 8px space
+              // Second clickable SVG with blur
               Expanded(
                 child: GestureDetector(
                   onTap: () {
@@ -63,12 +69,16 @@ class Component3 extends StatelessWidget {
                     print("Second image clicked");
                   },
                   child: Container(
-                    margin: EdgeInsets.only(left: deviceWidth * 0.02), // 2% of screen width
                     child: Center(
-                      child: SvgPicture.asset(
-                        'assets/QuickInfo.svg',
-                        width: deviceWidth * 0.14, // Increased to 12% of screen width
-                        height: deviceHeight * 0.14, // Adjusted to 12% of screen height
+                      child: ClipRRect(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // Increased blur effect
+                          child: SvgPicture.asset(
+                            'assets/QuickInfo.svg',
+                            width: deviceWidth * 0.14, // Adjusted size
+                            height: deviceHeight * 0.14, // Adjusted size
+                          ),
+                        ),
                       ),
                     ),
                   ),

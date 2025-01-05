@@ -35,12 +35,13 @@ class CustomCard extends StatelessWidget {
                   Text(
                     'Welcome Back!',
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w800,
+                      color: Color(0xFFFFFFFF),
                       fontFamily: 'Barlow Semi Condensed',
                       fontStyle: FontStyle.italic,
-                      height: 1.2,
+                      letterSpacing: 1.5,
+                      // height: 1.2,
                     ),
                   ),
                   const SizedBox(height: 3),
@@ -59,8 +60,8 @@ class CustomCard extends StatelessWidget {
               Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // Steps row with manual spacing
                       Row(
                         children: List.generate(5, (index) {
                           return Row(
@@ -68,38 +69,47 @@ class CustomCard extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {},
                                 child: Obx(() => Column(
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor: controller.currentStep.value >= index
-                                          ? const Color.fromRGBO(184, 254, 34, 1)
-                                          : Colors.grey,
-                                      child: SvgPicture.asset(
-                                        'assets/step${index + 1}.svg',
-                                        width: 14,
-                                        height: 14,
-                                        color: controller.currentStep.value >= index
-                                            ? const Color(0xFF003366)
-                                            : Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                )),
+                                      children: [
+                                        CircleAvatar(
+                                          backgroundColor:
+                                              controller.currentStep.value >=
+                                                      index
+                                                  ? const Color.fromRGBO(
+                                                      184, 254, 34, 1)
+                                                  : Colors.grey,
+                                          child: SvgPicture.asset(
+                                            'assets/step${index + 1}.svg',
+                                            width: 14,
+                                            height: 14,
+                                            color:
+                                                controller.currentStep.value >=
+                                                        index
+                                                    ? const Color(0xFF003366)
+                                                    : Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    )),
                               ),
                               if (index < 4)
-                                Obx(() => Container(
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                    width: 8,
-                                    height: 6,
-                                    color: controller.currentStep.value > index
-                                        ? const Color.fromRGBO(184, 254, 34, 1)
-                                        : Colors.grey,
-                                  ),
-                                )),
+                                Obx(() => SizedBox(
+                                      width:
+                                          16, // Increased spacing between steps
+                                      child: Container(
+                                        height: 6,
+                                        color:
+                                            controller.currentStep.value > index
+                                                ? const Color.fromRGBO(
+                                                    184, 254, 34, 1)
+                                                : Colors.grey,
+                                      ),
+                                    )),
                             ],
                           );
                         }),
                       ),
+                      const SizedBox(
+                          width: 8), // Space between steps and divider
                       const Text(
                         '|',
                         style: TextStyle(
@@ -107,14 +117,17 @@ class CustomCard extends StatelessWidget {
                           fontSize: 30,
                         ),
                       ),
+                      const SizedBox(
+                          width:
+                              4), // Space between divider and percentage text
                       Obx(() => Text(
-                        '${controller.currentPercentage}%',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
-                      )),
+                            '${controller.currentPercentage}%',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          )),
                     ],
                   ),
                 ],
@@ -126,22 +139,25 @@ class CustomCard extends StatelessWidget {
                   }
                 },
                 child: Obx(() => Text(
-                  controller.currentButtonText,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    height: 1.5,
-                    color: const Color(0xFF121212),
-                  ),
-                )),
+                      controller.currentButtonText,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        height: 1.5,
+                        color: const Color(0xFF121212),
+                      ),
+                    )),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
                     controller.currentStep.value == 4
                         ? const Color.fromRGBO(184, 254, 34, 1)
                         : const Color.fromRGBO(184, 254, 34, 1),
                   ),
-                  minimumSize: MaterialStateProperty.all(Size(deviceWidth * 0.85, deviceHeight * 0.05)), // Responsive size
-                  padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 8)),
+                  minimumSize: MaterialStateProperty.all(Size(
+                      deviceWidth * 0.85,
+                      deviceHeight * 0.05)), // Responsive size
+                  padding: MaterialStateProperty.all(
+                      const EdgeInsets.symmetric(vertical: 8)),
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),

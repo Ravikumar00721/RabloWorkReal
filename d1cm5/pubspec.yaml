@@ -67,6 +67,11 @@ flutter:
     - assets/step1.svg
     - assets/step2.svg
     - assets/step3.svg
+    - assets/helpandsupport.svg
+    - assets/Members.svg
+    - assets/Home.svg
+    - assets/Person.svg
+    - assets/BarCode.svg
     - assets/exchange.svg
     - assets/locked.svg
     - assets/homeyes.svg
@@ -75,6 +80,9 @@ flutter:
     - assets/headphone.svg
     - assets/QuickInfo.svg
     - assets/HorizontalInforBox.svg
+    - assets/girl.png
+    - assets/Frame.png
+    - assets/Vector.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
