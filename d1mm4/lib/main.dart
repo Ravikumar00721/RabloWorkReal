@@ -1,19 +1,23 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:d1mm4/components/app_bar.dart';
+import 'package:d1mm4/components/custom_bottom_navigation_bar.dart';
 import 'controllers/card_controller.dart';
+import 'controllers/btm_navigation_bar_controller.dart';
 import 'components/welcomebox.dart';
 import 'components/accessiblitybox.dart';
 import 'components/quickinfo.dart';
 import 'components/horizontalinforbox.dart';
 
-
 void main() {
+  // Initialize GetX controllers globally
+  Get.put(NavigationController()); // Initialize NavigationController
+  Get.put(CardController()); // Initialize CardController
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +33,22 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(CardController());
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double deviceHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: CustomAppBar(
+        deviceWidth: deviceWidth,
+        deviceHeight: deviceHeight,
+      ),
       body: Stack(
         children: [
+          // Background layers
           Positioned.fill(
             child: Image.asset(
               'assets/background.png',
@@ -54,27 +65,29 @@ class HomePage extends StatelessWidget {
               color: const Color(0xFF063434).withOpacity(0.8),
             ),
           ),
+          // Main content
           Positioned(
             top: 50,
             left: 0,
             right: 0,
-            bottom: 0,
-            child: Container(
-              padding: const EdgeInsets.fromLTRB(8, 50, 8, 0),
+            bottom:0, // Adjust for the navigation bar
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(8, 100, 8, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 50, left: 8, right: 8),
-                    child: CustomCard(
-                      controller: controller, 
-                    ),
+                  CustomCard(
+                    controller: Get.find<CardController>(),
                   ),
                   const SizedBox(height: 10),
                   Component2(),
-                  Component3(),              
+                  Component3(),
                   Component4(),
-              
+                  // Container below Component4 with margin and Component5 inside it
+                  Container(
+                    margin: const EdgeInsets.only(top: 59),
+                    child: Component5(),
+                  ),
                 ],
               ),
             ),
