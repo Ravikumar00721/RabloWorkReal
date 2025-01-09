@@ -20,42 +20,60 @@ class Component5 extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SvgPicture.asset(
-                    'assets/homeyes.svg',
-                    width: 30,
-                    height: 30,
-                    color: const Color.fromRGBO(184, 254, 34, 1), // Updated color
+                  GestureDetector(
+                    onTap: () {
+                      // Action for the first icon
+                      debugPrint("HomeYes icon clicked");
+                    },
+                    child: SvgPicture.asset(
+                      'assets/homeyes.svg',
+                      width: 30,
+                      height: 30,
+                      color: const Color.fromRGBO(184, 254, 34, 1), // Updated color
+                    ),
                   ),
                   const SizedBox(width: 40), // Increased the space between the icons
-                  SvgPicture.asset(
-                    'assets/personno.svg',
-                    width: 30,
-                    height: 30,
-                    color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      // Action for the second icon
+                      debugPrint("PersonNo icon clicked");
+                    },
+                    child: SvgPicture.asset(
+                      'assets/personno.svg',
+                      width: 30,
+                      height: 30,
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),
             ),
             Positioned(
-              top: -20, // Adjusted to align the circular boundary
-              left: 120, // Centers the icon horizontally
-              child: Container(
-                width: 50, // Size of the circular boundary
-                height: 50,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: const Color(0xFF2F5B6C), // Blue boundary color
-                    width: 3, // Thickness of the boundary
+              top: -35, // Adjusted to align the larger circle
+              left: 105, // Adjusted to center the larger circle
+              child: GestureDetector(
+                onTap: () {
+                  // Action for the circular icon
+                  debugPrint("Center icon clicked");
+                },
+                child: Container(
+                  width: 70, // Increased size of the circular boundary
+                  height: 70,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: const Color(0xFF2F5B6C), // Blue boundary color
+                      width: 3, // Thickness of the boundary
+                    ),
+                    color: const Color(0xFF063434), // Background color
                   ),
-                  color: const Color(0xFF063434), // Background color
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    'assets/icon.svg',
-                    width: 30,
-                    height: 30,
-                    color: Colors.white,
+                  child: Center(
+                    child: SvgPicture.asset(
+                      'assets/icon.svg',
+                      width: 40, // Adjusted icon size to fit the larger circle
+                      height: 40,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

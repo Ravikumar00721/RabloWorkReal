@@ -101,7 +101,7 @@ class CustomCard extends StatelessWidget {
                           );
                         }),
                       ),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 15),
                       const Text(
                         '|',
                         style: TextStyle(
@@ -109,13 +109,26 @@ class CustomCard extends StatelessWidget {
                           fontSize: 30,
                         ),
                       ),
-                      const SizedBox(width: 10),
-                      Obx(() => Text(
-                            '${controller.currentPercentage}%',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                      const SizedBox(width: 15),
+                      // Adjust percentage display
+                      Obx(() => Align(
+                            alignment: Alignment
+                                .centerRight, // Align percentage to the right
+                            child: Container(
+                              constraints: const BoxConstraints(
+                                minWidth: 40, // Minimum width for the container
+                                maxWidth: 60, // Maximum width for the container
+                              ),
+                              child: Text(
+                                '${controller.currentPercentage}%',
+                                textAlign: TextAlign
+                                    .right, // Align text inside container
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
                             ),
                           )),
                     ],
@@ -138,11 +151,12 @@ class CustomCard extends StatelessWidget {
                 ),
                 child: Obx(() => Text(
                       controller.currentButtonText,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
                         height: 1.5,
                         color: Color(0xFF121212),
+                        fontFamily: 'Poppins',
                       ),
                     )),
               ),

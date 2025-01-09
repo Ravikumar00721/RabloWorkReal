@@ -5,7 +5,7 @@ class CardController extends GetxController {
   var currentStep = 0.obs;
   var stepProgress = [20, 40, 60, 80, 100].obs;
   var stepTexts = [
-    "Complete your profile",
+    "Complete Your Profile",
     "Verify yourself",
     "Complete verification",
     "Create your plan",
