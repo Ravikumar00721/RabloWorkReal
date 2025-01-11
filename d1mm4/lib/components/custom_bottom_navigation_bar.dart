@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'scanning_unavailable.dart';
 
 class Component5 extends StatelessWidget {
+  const Component5({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -53,8 +56,13 @@ class Component5 extends StatelessWidget {
               left: 105, // Adjusted to center the larger circle
               child: GestureDetector(
                 onTap: () {
-                  // Action for the circular icon
-                  debugPrint("Center icon clicked");
+                  // Action for the circular icon, show the ExitDialog when clicked
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const ScanningUnavailable(); // Show ExitDialog
+                    },
+                  );
                 },
                 child: Container(
                   width: 70, // Increased size of the circular boundary

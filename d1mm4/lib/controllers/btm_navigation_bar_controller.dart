@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class NavigationController extends GetxController {
+class BottomNavigationController extends GetxController {
 
   final RxInt _currentIndex = 0.obs;
 

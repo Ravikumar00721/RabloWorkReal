@@ -79,6 +79,9 @@ flutter:
     - assets/icon.svg
     - assets/QuickInfo.svg
     - assets/HorizontalInforBox.svg
+    - assets/Hamburger.svg
+    - assets/warning.svg
+    - assets/Hurray
     - assets/Frame.png
     - assets/girl.png
     - assets/Vector.png
