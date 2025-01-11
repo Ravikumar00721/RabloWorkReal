@@ -10,19 +10,17 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get the device's dimensions
-    // final double deviceWidth = MediaQuery.of(context).size.width;
     final double deviceHeight = MediaQuery.of(context).size.height;
 
     return Card(
-      margin: EdgeInsets.zero, // Removes default margin
+      margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
       color: const Color(0xFF2F5B6C),
       child: SizedBox(
-        width: double.infinity, // Use 90% of device width
-        height: deviceHeight * 0.25, // Use 25% of device height
+        width: double.infinity,
+        height: deviceHeight * 0.25,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -32,22 +30,26 @@ class CustomCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Welcome Back!',
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFFFFFFFF),
-                      fontFamily: 'Barlow Semi Condensed',
-                      fontStyle: FontStyle.italic,
-                      letterSpacing: 1.5,
+                  // "Welcome Back!" with less italic effect
+                  Transform(
+                    transform: Matrix4.skewX(-0.1), // Less italic effect
+                    child: const Text(
+                      'Welcome Back!',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFFFFFFFF),
+                        fontFamily: 'Barlow Semi Condensed',
+                        fontStyle: FontStyle.normal,
+                        letterSpacing: 1.0,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 3),
                   const Text(
                     'You are One-Step Closer to creating your App',
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 13,
                       fontWeight: FontWeight.w400,
                       color: Colors.white,
                       fontFamily: 'Poppins',
@@ -56,83 +58,67 @@ class CustomCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Column(
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      Row(
-                        children: List.generate(5, (index) {
-                          return Row(
-                            children: [
-                              Obx(() => Column(
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundColor:
-                                            controller.currentStep.value >=
-                                                    index
-                                                ? const Color.fromRGBO(
-                                                    184, 254, 34, 1)
-                                                : Colors.grey,
-                                        child: SvgPicture.asset(
-                                          'assets/step${index + 1}.svg',
-                                          width: 14,
-                                          height: 14,
-                                          color: controller.currentStep.value >=
-                                                  index
-                                              ? const Color(0xFF003366)
-                                              : Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                              if (index < 4)
-                                Obx(() => SizedBox(
-                                      width: 16, // Adjust spacing between steps
-                                      child: Container(
-                                        height: 6,
-                                        color:
-                                            controller.currentStep.value > index
-                                                ? const Color.fromRGBO(
-                                                    184, 254, 34, 1)
-                                                : Colors.grey,
-                                      ),
-                                    )),
-                            ],
-                          );
-                        }),
-                      ),
-                      const SizedBox(width: 15),
-                      const Text(
-                        '|',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                        ),
-                      ),
-                      const SizedBox(width: 15),
-                      // Adjust percentage display
-                      Obx(() => Align(
-                            alignment: Alignment
-                                .centerRight, // Align percentage to the right
-                            child: Container(
-                              constraints: const BoxConstraints(
-                                minWidth: 40, // Minimum width for the container
-                                maxWidth: 60, // Maximum width for the container
+                  // Steps
+                  Expanded(
+                    child: Row(
+                      children: List.generate(5, (index) {
+                        return Row(
+                          children: [
+                            Obx(() => CircleAvatar(
+                              backgroundColor:
+                              controller.currentStep.value >= index
+                                  ? const Color.fromRGBO(184, 254, 34, 1)
+                                  : Colors.grey,
+                              child: SvgPicture.asset(
+                                'assets/step${index + 1}.svg',
+                                width: 14,
+                                height: 14,
+                                color: controller.currentStep.value >= index
+                                    ? const Color(0xFF003366)
+                                    : Colors.white,
                               ),
-                              child: Text(
-                                '${controller.currentPercentage}%',
-                                textAlign: TextAlign
-                                    .right, // Align text inside container
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                            )),
+                            if (index < 4)
+                              Obx(() => SizedBox(
+                                width: 24,
+                                child: Container(
+                                  height: 6,
+                                  color: controller.currentStep.value > index
+                                      ? const Color.fromRGBO(
+                                      184, 254, 34, 1)
+                                      : Colors.grey,
                                 ),
-                              ),
-                            ),
-                          )),
-                    ],
+                              )),
+                          ],
+                        );
+                      }),
+                    ),
                   ),
+                  const SizedBox(width: 8),
+                  const Text(
+                    '|',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  // Percentage Text with less italic effect
+                  Obx(() => Transform(
+                    transform: Matrix4.skewX(-0.1), // Less italic effect
+                    child: Text(
+                      '${controller.currentPercentage}%',
+                      style: const TextStyle(
+                        fontFamily: 'Barlow Semi Condensed',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                        height: 1.2,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )),
                 ],
               ),
               ElevatedButton(
@@ -150,15 +136,15 @@ class CustomCard extends StatelessWidget {
                   ),
                 ),
                 child: Obx(() => Text(
-                      controller.currentButtonText,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        height: 1.5,
-                        color: Color(0xFF121212),
-                        fontFamily: 'Poppins',
-                      ),
-                    )),
+                  controller.currentButtonText,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    height: 1.5,
+                    color: Color(0xFF121212),
+                    fontFamily: 'Poppins',
+                  ),
+                )),
               ),
             ],
           ),

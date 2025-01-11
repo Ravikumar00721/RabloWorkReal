@@ -31,7 +31,7 @@ class Component4 extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Container(
           width: 340, // 90% of the screen width
           height: 2,
