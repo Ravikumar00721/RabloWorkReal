@@ -1,6 +1,8 @@
+import 'package:d1mm4/components/MyPlan.dart';
+import 'package:d1mm4/components/My_Files.dart';
+import 'package:d1mm4/components/Step_4.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:d1mm4/controllers/app_bar_controller.dart';
 import 'package:d1mm4/controllers/card_controller.dart';
 import 'package:d1mm4/components/app_bar_1.dart';
 import 'package:d1mm4/components/custom_bottom_navigation_bar.dart';
@@ -9,15 +11,16 @@ import 'package:d1mm4/components/accessiblitybox.dart';
 import 'package:d1mm4/components/quickinfo.dart';
 import 'package:d1mm4/components/horizontalinforbox.dart';
 
-
+import 'components/Buisness_Account.dart';
 import 'components/Progress_Lost.dart';
+import 'components/Step5.dart';
+import 'components/Verification.dart';
 import 'controllers/btm_navigation_bar_controller.dart'; // Import the ExitDialog
 
 void main() {
   // Initialize GetX controllers globally
   Get.put(BottomNavigationController()); // Initialize NavigationController
   Get.put(CardController()); // Initialize CardController
-  Get.put(AppBarController());
   runApp(const MyApp());
 }
 
@@ -33,6 +36,16 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const HomePage(),
+      // Define routes
+      getPages: [
+        GetPage(name: '/', page: () => const HomePage()),
+        GetPage(name: '/business-account', page: () => const BusinessAccount()),
+        GetPage(name: '/verification', page: () => const Verification()),
+        GetPage(name: '/step4', page: () => const Step4()),
+        GetPage(name: '/step5', page: () => const Step5()),
+        GetPage(name: '/myplan', page: () => const Myplan()),
+        GetPage(name: '/myfiles', page: () => const MyFiles()),
+      ],
     );
   }
 }
@@ -45,24 +58,18 @@ class HomePage extends StatelessWidget {
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double deviceHeight = MediaQuery.of(context).size.height;
 
-    // Ensure that toggleAppBarAssets() calls the else part when HomePage is loaded
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Toggle app bar assets, calling the else part of the method
-      Get.find<AppBarController>().toggleAppBarAssets(isHomePage: true); // Pass a flag
-    });
-
     return WillPopScope(
       onWillPop: () async {
         // Show the custom dialog when the back button is pressed
         _showCustomDialog(context);
-        return false; // Return false to prevent default back action
+        return false; // Return false to prevent the default back action
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
           preferredSize: Size(deviceWidth, 60), // Adjust app bar height if needed
-          child: Padding(
-            padding: const EdgeInsets.only(top: 19), // Set 19px padding from the top
+          child: const Padding(
+            padding: EdgeInsets.only(top: 19), // Set 19px padding from the top
             child: CustomAppBar(),
           ),
         ),
@@ -96,9 +103,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CustomCard(
-                      controller: Get.find<CardController>(),
-                    ),
+                    const CustomCard(),
                     const SizedBox(height: 10),
                     Component2(),
                     const Component3(),
@@ -106,7 +111,7 @@ class HomePage extends StatelessWidget {
                     // Container below Component4 with margin and Component5 inside it
                     Container(
                       margin: const EdgeInsets.only(top: 59),
-                      child: Component5(),
+                      child: const Component5(),
                     ),
                   ],
                 ),

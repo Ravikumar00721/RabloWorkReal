@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 import '../controllers/card_controller.dart';
 
 class CustomCard extends StatelessWidget {
-  final CardController controller;
-
-  const CustomCard({Key? key, required this.controller}) : super(key: key);
+  const CustomCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final CardController controller = Get.find<CardController>(); // Get the instance of CardController
+
     final double deviceHeight = MediaQuery.of(context).size.height;
 
     return Card(
@@ -80,14 +80,14 @@ class CustomCard extends StatelessWidget {
                                     : Colors.white,
                               ),
                             )),
+
                             if (index < 4)
                               Obx(() => SizedBox(
                                 width: 24,
                                 child: Container(
                                   height: 6,
                                   color: controller.currentStep.value > index
-                                      ? const Color.fromRGBO(
-                                      184, 254, 34, 1)
+                                      ? const Color.fromRGBO(184, 254, 34, 1)
                                       : Colors.grey,
                                 ),
                               )),
@@ -123,9 +123,14 @@ class CustomCard extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (controller.currentStep.value < 4) {
-                    controller.changeStep(controller.currentStep.value + 1);
-                  }
+                  // Instantly update the step
+                  controller.changeStep();
+
+                  // Add a 1-second delay before navigation
+                  Future.delayed(const Duration(seconds: 1), () {
+                    // Perform navigation after a short delay
+                    controller.handleNavigation();
+                  });
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(184, 254, 34, 1),
