@@ -121,16 +121,11 @@ class CustomCard extends StatelessWidget {
                   )),
                 ],
               ),
+              //Change Step Logic
               ElevatedButton(
                 onPressed: () {
                   // Instantly update the step
                   controller.changeStep();
-
-                  // Add a 1-second delay before navigation
-                  Future.delayed(const Duration(seconds: 1), () {
-                    // Perform navigation after a short delay
-                    controller.handleNavigation();
-                  });
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(184, 254, 34, 1),

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/card_controller.dart';
 
-class MyFiles extends StatelessWidget {
-  const MyFiles({super.key});
+class D1CM6 extends StatelessWidget {
+  const D1CM6({super.key});
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("MyFiles"),
+        title: const Text("D1CM6"),
         backgroundColor: const Color(0xFF2F5B6C),
       ),
       body: Center(
@@ -18,7 +18,7 @@ class MyFiles extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'MyFiles',
+              'D1CM6',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,

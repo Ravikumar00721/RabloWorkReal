@@ -58,7 +58,13 @@ class Component2 extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        controller.toggleIcon(index); // Call the AccessibilityController to toggle the state for the clicked item
+        controller.toggleIcon(index); // Toggle the state for the clicked item
+
+        // Navigation logic based on index
+        if (index == 1) {
+          // Navigate to D1CM6 when "My Transactions" is clicked
+          Get.toNamed('/d1cm6');
+        }
       },
       child: Obx(() {
         String iconPath = controller.getIconPath(index); // Get icon path from the controller

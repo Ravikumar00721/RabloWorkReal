@@ -1,7 +1,14 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import 'Container.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({super.key, required this.onFrameTap, required this.onHamburgerTap});
+
+  final VoidCallback onFrameTap; // Callback to trigger the sliding container
+  final VoidCallback onHamburgerTap; // Callback to trigger the hamburger visibility
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +21,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             const SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween, // Ensure space between elements
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Containerized first element (Icon) - Manually set PNG image
+                // First element (Icon) - Manually set PNG image
                 Container(
                   padding: const EdgeInsets.all(20),
                   child: InkWell(
@@ -26,24 +33,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       width: 40,
                     ),
                     onTap: () {
-                      Navigator.of(context).pop();
+                      // Custom logic for this tap (if any)
                     },
                   ),
                 ),
 
-                // Containerized second element (Title) inside a Column with two rows
-                Expanded( // Make the column flexible with respect to available space
+                // Title with two rows
+                Expanded(
                   child: Container(
-                    // padding: const EdgeInsets.symmetric(vertical: 25),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // First Row with "Hi John" and "unverified"
+                        // "Hi John" and "unverified"
                         Row(
                           children: [
-                            // First part of the title ("Hi John") aligned to the left
                             Container(
-                              // padding: const EdgeInsets.all(20),
                               child: const Text(
                                 'Hi John',  // First part of the title
                                 style: TextStyle(
@@ -54,13 +58,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 ),
                               ),
                             ),
-                            const SizedBox(width:5),
-                            // Second part of the title ("unverified") with custom styles
+                            const SizedBox(width: 5),
                             Container(
                               padding: const EdgeInsets.only(top: 2, right: 4, bottom: 2, left: 4),
                               decoration: BoxDecoration(
-                                color: const Color(0xDFB20006),  // Custom background color
-                                borderRadius: BorderRadius.circular(999),  // Rounded corners
+                                color: const Color(0xDFB20006),
+                                borderRadius: BorderRadius.circular(999),
                               ),
                               child: const Text(
                                 'unverified',  // Second part of the title
@@ -74,9 +77,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 2), // Space between the rows
+                        const SizedBox(height: 2),
 
-                        // Second Row with "This is Rablo" - Applying the custom color only to "Rablo"
+                        // "This is Rablo"
                         Row(
                           children: [
                             Transform(
@@ -85,23 +88,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 text: const TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: 'This is ', // First part of the text
+                                      text: 'This is ',
                                       style: TextStyle(
                                         fontSize: 20,
-                                        fontWeight: FontWeight.w700, // Bold
+                                        fontWeight: FontWeight.w700,
                                         color: Colors.white,
-                                        fontFamily: 'Barlow Semi Condensed', // Custom font
-                                        height: 1.2, // Line height (for spacing)
+                                        fontFamily: 'Barlow Semi Condensed',
+                                        height: 1.2,
                                       ),
                                     ),
                                     TextSpan(
-                                      text: 'Rablo..', // Second part (with custom color)
+                                      text: 'Rablo..',
                                       style: TextStyle(
                                         fontSize: 20,
-                                        fontWeight: FontWeight.w700, // Bold
-                                        color: Color.fromRGBO(184, 254, 34, 1), // Custom color
-                                        fontFamily: 'Barlow Semi Condensed', // Custom font
-                                        height: 1.2, // Line height (for spacing)
+                                        fontWeight: FontWeight.w700,
+                                        color: Color.fromRGBO(184, 254, 34, 1),
+                                        fontFamily: 'Barlow Semi Condensed',
+                                        height: 1.2,
                                       ),
                                     ),
                                   ],
@@ -115,7 +118,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
 
-                // Containerized third element (Empty space for spacing)
+                // Empty space
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 25),
                   child: InkWell(
@@ -124,23 +127,24 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       height: 32,
                       width: 32,
                     ),
+                    onTap: () {
+                      SlidingContainerExample();
+                    }, // Trigger the sliding container visibility when tapped
                   ),
                 ),
 
-                // Containerized Vector icon (Static icon) - Manually set vector icon
+                // Vector icon (Static icon)
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
                   child: InkWell(
-                    child: Image.asset(
-                      'assets/Vector.png', // Static PNG icon (replace with your actual asset path)
+                    child: SvgPicture.asset(
+                      'assets/Vector.svg',
                       height: 16,
                       width: 24,
                     ),
-                    onTap: () {
-                      // Action when Vector icon is tapped
-                    },
+                    onTap: onHamburgerTap, // Trigger the hamburger toggle when tapped
                   ),
-                ),
+                )
               ],
             ),
           ],

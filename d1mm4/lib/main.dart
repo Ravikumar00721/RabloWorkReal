@@ -1,5 +1,5 @@
 import 'package:d1mm4/components/MyPlan.dart';
-import 'package:d1mm4/components/My_Files.dart';
+import 'package:d1mm4/components/D1CM6.dart';
 import 'package:d1mm4/components/Step_4.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,12 +10,12 @@ import 'package:d1mm4/components/welcomebox.dart';
 import 'package:d1mm4/components/accessiblitybox.dart';
 import 'package:d1mm4/components/quickinfo.dart';
 import 'package:d1mm4/components/horizontalinforbox.dart';
-
 import 'components/Buisness_Account.dart';
 import 'components/Progress_Lost.dart';
 import 'components/Step5.dart';
 import 'components/Verification.dart';
-import 'controllers/btm_navigation_bar_controller.dart'; // Import the ExitDialog
+import 'controllers/btm_navigation_bar_controller.dart';
+import 'components/hamburger.dart'; // Import Hamburger widget
 
 void main() {
   // Initialize GetX controllers globally
@@ -44,14 +44,28 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/step4', page: () => const Step4()),
         GetPage(name: '/step5', page: () => const Step5()),
         GetPage(name: '/myplan', page: () => const Myplan()),
-        GetPage(name: '/myfiles', page: () => const MyFiles()),
+        GetPage(name: '/d1cm6', page: () => const D1CM6()),
       ],
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool _isHamburgerVisible = false; // State for hamburger menu visibility
+
+  // Toggle the visibility of the hamburger menu
+  void _toggleHamburgerVisibility() {
+    setState(() {
+      _isHamburgerVisible = !_isHamburgerVisible;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +82,9 @@ class HomePage extends StatelessWidget {
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
           preferredSize: Size(deviceWidth, 60), // Adjust app bar height if needed
-          child: const Padding(
-            padding: EdgeInsets.only(top: 19), // Set 19px padding from the top
-            child: CustomAppBar(),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 19), // Set 19px padding from the top
+            child: CustomAppBar(onHamburgerTap: _toggleHamburgerVisibility, onFrameTap: () {  },),
           ),
         ),
         body: Stack(
@@ -116,6 +130,11 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+            // Hamburger Menu
+            Hamburger(
+              isVisible: _isHamburgerVisible,
+              onBackgroundTap: _toggleHamburgerVisibility,
             ),
           ],
         ),
