@@ -1,5 +1,6 @@
 import 'dart:ui'; // Required for BackdropFilter
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg for SVG support
 
 class NotificationContainer extends StatefulWidget {
   const NotificationContainer({
@@ -16,6 +17,8 @@ class NotificationContainer extends StatefulWidget {
 }
 
 class _NotificationState extends State<NotificationContainer> {
+  int _selectedItemIndex = -1; // Track the selected item index
+
   @override
   Widget build(BuildContext context) {
     final double notiWidth = MediaQuery.of(context).size.width; // Full screen width
@@ -78,7 +81,7 @@ class _NotificationState extends State<NotificationContainer> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
-                              "Notification",
+                              "Notifications",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: 'Barlow Semi Condensed',
@@ -96,8 +99,107 @@ class _NotificationState extends State<NotificationContainer> {
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Color.fromRGBO(184, 254, 34, 1),
-                                  fontFamily: 'Poppins'
+                                  fontFamily: 'Poppins',
                                 ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Filter Row with Scrollable Items
+                      Container(
+                        height: 49,
+                        child: Row(
+                          children: [
+                            // Use SVG Picture instead of Icon
+                            Padding(
+                              padding: const EdgeInsets.only(left: 18),
+                              child: SvgPicture.asset(
+                                'assets/Pc.svg', // Path to your SVG
+                                color: Colors.white,
+                                width: 17,
+                                height: 16,
+                              ),
+                            ),
+                            const SizedBox(width: 3),
+                            const SizedBox(
+                              height: 15, // Shorter height for divider
+                              child: VerticalDivider(
+                                color: Colors.white,
+                                thickness: 1,
+                                width: 10,
+                              ),
+                            ),// Space between SVG and text
+                            const SizedBox(width: 3),
+                            // Text "Filter"
+                            const Text(
+                              "Filter by",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(width: 7),
+                            // Horizontal Scrollable List of Items
+                            Container(
+                              width: 295, // Fixed width
+                              height: 49, // Fixed height
+                              decoration: BoxDecoration(
+                                color: const Color.fromRGBO(85, 166, 196, 0.3),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 2,
+                                horizontal: 5,
+                              ),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 7,
+                                itemBuilder: (context, index) {
+                                  return Row(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _selectedItemIndex = index; // Update selected index
+                                          });
+                                        },
+                                        child: Container(
+                                          margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                                          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8), // Adjusted padding
+                                          decoration: BoxDecoration(
+                                            color: _selectedItemIndex == index
+                                                ? Colors.white
+                                                : Colors.transparent,
+                                            borderRadius: BorderRadius.circular(4),
+                                          ),
+                                          child: Text(
+                                            'Item ${index + 1}', // Text for item
+                                            style: TextStyle(
+                                              color: _selectedItemIndex == index
+                                                  ? const Color.fromARGB(255, 11, 11, 62) // Corrected color value (blue with full opacity)
+                                                  : Colors.white,
+                                              fontSize: 14,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      if (index < 6) // Add divider between items except for the last one
+                                        const SizedBox(
+                                          height: 25, // Shorter height for divider
+                                          child: VerticalDivider(
+                                            color: Colors.white,
+                                            thickness: 1,
+                                            width: 10,
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                                },
                               ),
                             ),
                           ],

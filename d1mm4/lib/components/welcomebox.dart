@@ -97,11 +97,12 @@ class CustomCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  const Text(
-                    '|',
-                    style: TextStyle(
+                  const SizedBox(
+                    height: 25, // Shorter height for divider
+                    child: VerticalDivider(
                       color: Colors.white,
-                      fontSize: 30,
+                      thickness: 1,
+                      width: 10,
                     ),
                   ),
                   const SizedBox(width: 8),
