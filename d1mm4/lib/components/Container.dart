@@ -1,76 +1,116 @@
+import 'dart:ui'; // Required for BackdropFilter
 import 'package:flutter/material.dart';
-import 'dart:ui'; // For BackdropFilter
-import 'package:d1mm4/components/app_bar_1.dart'; // Replace with correct path
 
-class SlidingContainerExample extends StatefulWidget {
+class NotificationContainer extends StatefulWidget {
+  const NotificationContainer({
+    super.key,
+    required this.isVisible,
+    required this.onBackgroundTap,
+  });
+
+  final bool isVisible; // Control visibility from the parent
+  final VoidCallback onBackgroundTap;
+
   @override
-  _SlidingContainerExampleState createState() =>
-      _SlidingContainerExampleState();
+  _NotificationState createState() => _NotificationState();
 }
 
-class _SlidingContainerExampleState extends State<SlidingContainerExample> {
-  double _top = -650; // Initial position outside the screen
-  bool _isContainerVisible = false; // Boolean to control visibility
-
-  // Toggle visibility of the sliding container when Frame.svg is clicked
-  void _toggleSlidingContainer() {
-    setState(() {
-      _isContainerVisible = !_isContainerVisible;
-      _top = _isContainerVisible ? 200.0 : -650; // 200px from the bottom
-    });
-  }
-
+class _NotificationState extends State<NotificationContainer> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        onFrameTap: _toggleSlidingContainer,  // Pass the function as a callback
-        onHamburgerTap: () {
-          // Add your hamburger menu logic here
-        },
-      ),
-      body: Stack(
-        children: [
-          AnimatedPositioned(
-            duration: Duration(seconds: 2), // Duration of the slide animation
-            top: _top,
-            left: 413,
+    final double notiWidth = MediaQuery.of(context).size.width; // Full screen width
+    final double notiHeight = 750; // Notification height
+    final double startPosition = -notiHeight; // Hidden above the screen
+    final double visiblePosition = 0; // Fully visible at the top of the screen
+
+    return Stack(
+      children: [
+        if (widget.isVisible)
+          GestureDetector(
+            onTap: widget.onBackgroundTap, // Close menu on background tap
             child: Container(
-              width: 350,
-              height: 650,
-              padding: EdgeInsets.symmetric(vertical: 40, horizontal: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(40),
-                  bottomRight: Radius.circular(40),
-                ),
-                color: Color(0x5575A6C4), // rgba(85, 166, 196, 0.3)
+              color: Colors.transparent, // Semi-transparent background
+              width: double.infinity,
+              height: double.infinity,
+            ),
+          ),
+        AnimatedPositioned(
+          duration: const Duration(milliseconds: 300), // Duration of the animation
+          curve: Curves.easeInOut, // Smooth animation curve
+          top: widget.isVisible ? visiblePosition : startPosition, // Slide in/out from the top
+          left: 0, // Align to the left edge of the screen
+          child: Container(
+            width: notiWidth,
+            height: notiHeight,
+            padding: const EdgeInsets.only(
+              top: 40,
+              right: 8,
+              bottom: 20,
+              left: 8,
+            ),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+                bottomLeft: Radius.circular(40),
+                bottomRight: Radius.circular(40),
               ),
-              child: Stack(
-                children: [
-                  BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
-                    child: Container(
-                      color: Colors.black.withOpacity(0.3), // Apply a subtle background color after blur
-                    ),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(85, 166, 196, 0.3),
                   ),
-                  Column(
+                  child: Column(
                     children: [
-                      // Add your content inside the container here
-                      Text(
-                        "Sliding Container",
-                        style: TextStyle(color: Colors.white, fontSize: 24),
+                      // Header Container
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: 40,
+                          left: 8,
+                          right: 8,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 16,
+                          horizontal: 8,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Notification",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontFamily: 'Barlow Semi Condensed',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                // Add functionality for "Mark all as read" here
+                                print("Mark all as read tapped");
+                              },
+                              child: const Text(
+                                "Mark all as read",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Color.fromRGBO(184, 254, 34, 1),
+                                  fontFamily: 'Poppins'
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

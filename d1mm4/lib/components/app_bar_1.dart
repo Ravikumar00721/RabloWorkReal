@@ -1,11 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'Container.dart';
-
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, required this.onFrameTap, required this.onHamburgerTap});
+  const CustomAppBar({super.key,required this.onHamburgerTap, required this.onFrameTap});
 
   final VoidCallback onFrameTap; // Callback to trigger the sliding container
   final VoidCallback onHamburgerTap; // Callback to trigger the hamburger visibility
@@ -127,9 +124,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       height: 32,
                       width: 32,
                     ),
-                    onTap: () {
-                      SlidingContainerExample();
-                    }, // Trigger the sliding container visibility when tapped
+                    onTap: onFrameTap, // Trigger the sliding container visibility when tapped
                   ),
                 ),
 

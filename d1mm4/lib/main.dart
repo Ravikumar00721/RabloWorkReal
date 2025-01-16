@@ -16,6 +16,7 @@ import 'components/Step5.dart';
 import 'components/Verification.dart';
 import 'controllers/btm_navigation_bar_controller.dart';
 import 'components/hamburger.dart'; // Import Hamburger widget
+import 'components/Container.dart';
 
 void main() {
   // Initialize GetX controllers globally
@@ -58,12 +59,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _isHamburgerVisible = false; // State for hamburger menu visibility
+  bool _isHamburgerVisible = false;
+  bool _NotiVisible = false;
 
   // Toggle the visibility of the hamburger menu
   void _toggleHamburgerVisibility() {
     setState(() {
       _isHamburgerVisible = !_isHamburgerVisible;
+    });
+  }
+
+  // Toggle the visibility of the notification container
+  void _toggleNotiVisiblty() {
+    setState(() {
+      _NotiVisible = !_NotiVisible;
     });
   }
 
@@ -74,19 +83,11 @@ class _HomePageState extends State<HomePage> {
 
     return WillPopScope(
       onWillPop: () async {
-        // Show the custom dialog when the back button is pressed
         _showCustomDialog(context);
-        return false; // Return false to prevent the default back action
+        return false;
       },
       child: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: PreferredSize(
-          preferredSize: Size(deviceWidth, 60), // Adjust app bar height if needed
-          child: Padding(
-            padding: const EdgeInsets.only(top: 19), // Set 19px padding from the top
-            child: CustomAppBar(onHamburgerTap: _toggleHamburgerVisibility, onFrameTap: () {  },),
-          ),
-        ),
+        extendBodyBehindAppBar: true, // Allow the body to extend behind the app bar
         body: Stack(
           children: [
             // Background layers
@@ -111,7 +112,7 @@ class _HomePageState extends State<HomePage> {
               top: 50,
               left: 0,
               right: 0,
-              bottom: 0, // Adjust for the navigation bar
+              bottom: 0,
               child: SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(8, 119, 8, 0),
                 child: Column(
@@ -122,7 +123,6 @@ class _HomePageState extends State<HomePage> {
                     Component2(),
                     const Component3(),
                     const Component4(),
-                    // Container below Component4 with margin and Component5 inside it
                     Container(
                       margin: const EdgeInsets.only(top: 59),
                       child: const Component5(),
@@ -131,10 +131,25 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            // Custom AppBar in the stack
+            Positioned(
+              top: 19, // Adjust the position of the app bar
+              left: 0,
+              right: 0,
+              child: CustomAppBar(
+                onHamburgerTap: _toggleHamburgerVisibility,
+                onFrameTap: _toggleNotiVisiblty,
+              ),
+            ),
             // Hamburger Menu
             Hamburger(
               isVisible: _isHamburgerVisible,
               onBackgroundTap: _toggleHamburgerVisibility,
+            ),
+            // Notification Container (placed above the app bar)
+            NotificationContainer(
+              isVisible: _NotiVisible,
+              onBackgroundTap: _toggleNotiVisiblty,
             ),
           ],
         ),
@@ -146,7 +161,7 @@ class _HomePageState extends State<HomePage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return const ExitDialog();  // Use the ExitDialog widget
+        return const ExitDialog(); // Use the ExitDialog widget
       },
     );
   }
