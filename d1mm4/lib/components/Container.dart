@@ -1,6 +1,9 @@
 import 'dart:ui'; // Required for BackdropFilter
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg for SVG support
+import 'package:flutter_svg/flutter_svg.dart';
+
+import 'ContainerItem.dart';
 
 class NotificationContainer extends StatefulWidget {
   const NotificationContainer({
@@ -21,10 +24,22 @@ class _NotificationState extends State<NotificationContainer> {
 
   @override
   Widget build(BuildContext context) {
-    final double notiWidth = MediaQuery.of(context).size.width; // Full screen width
+    final double notiWidth =
+        MediaQuery.of(context).size.width; // Full screen width
     final double notiHeight = 750; // Notification height
     final double startPosition = -notiHeight; // Hidden above the screen
     final double visiblePosition = 0; // Fully visible at the top of the screen
+
+    // List of labels for the filter items
+    final List<String> filterLabels = [
+      'All',
+      'Accounts Update',
+      'Memberships Update',
+      'Finance and Transaction',
+      'Customer\'s Update and Reminders',
+      'Promotion & Offers',
+      'Alert'
+    ];
 
     return Stack(
       children: [
@@ -32,16 +47,16 @@ class _NotificationState extends State<NotificationContainer> {
           GestureDetector(
             onTap: widget.onBackgroundTap, // Close menu on background tap
             child: Container(
-              color: Colors.transparent, // Semi-transparent background
+              color: Colors.transparent,
               width: double.infinity,
               height: double.infinity,
             ),
           ),
         AnimatedPositioned(
-          duration: const Duration(milliseconds: 300), // Duration of the animation
-          curve: Curves.easeInOut, // Smooth animation curve
-          top: widget.isVisible ? visiblePosition : startPosition, // Slide in/out from the top
-          left: 0, // Align to the left edge of the screen
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          top: widget.isVisible ? visiblePosition : startPosition,
+          left: 0,
           child: Container(
             width: notiWidth,
             height: notiHeight,
@@ -66,7 +81,7 @@ class _NotificationState extends State<NotificationContainer> {
                   ),
                   child: Column(
                     children: [
-                      // Header Container
+                      // Header
                       Container(
                         margin: const EdgeInsets.only(
                           top: 40,
@@ -91,7 +106,6 @@ class _NotificationState extends State<NotificationContainer> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                // Add functionality for "Mark all as read" here
                                 print("Mark all as read tapped");
                               },
                               child: const Text(
@@ -106,16 +120,15 @@ class _NotificationState extends State<NotificationContainer> {
                           ],
                         ),
                       ),
-                      // Filter Row with Scrollable Items
+                      // Filter Row
                       Container(
                         height: 49,
                         child: Row(
                           children: [
-                            // Use SVG Picture instead of Icon
                             Padding(
                               padding: const EdgeInsets.only(left: 18),
                               child: SvgPicture.asset(
-                                'assets/Pc.svg', // Path to your SVG
+                                'assets/Pc.svg',
                                 color: Colors.white,
                                 width: 17,
                                 height: 16,
@@ -123,15 +136,14 @@ class _NotificationState extends State<NotificationContainer> {
                             ),
                             const SizedBox(width: 3),
                             const SizedBox(
-                              height: 15, // Shorter height for divider
+                              height: 15,
                               child: VerticalDivider(
                                 color: Colors.white,
                                 thickness: 1,
                                 width: 10,
                               ),
-                            ),// Space between SVG and text
+                            ),
                             const SizedBox(width: 3),
-                            // Text "Filter"
                             const Text(
                               "Filter by",
                               style: TextStyle(
@@ -142,10 +154,9 @@ class _NotificationState extends State<NotificationContainer> {
                               ),
                             ),
                             const SizedBox(width: 7),
-                            // Horizontal Scrollable List of Items
                             Container(
-                              width: 295, // Fixed width
-                              height: 49, // Fixed height
+                              width: 295,
+                              height: 49,
                               decoration: BoxDecoration(
                                 color: const Color.fromRGBO(85, 166, 196, 0.3),
                                 borderRadius: BorderRadius.circular(10),
@@ -156,30 +167,34 @@ class _NotificationState extends State<NotificationContainer> {
                               ),
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: 7,
+                                itemCount: filterLabels.length,
                                 itemBuilder: (context, index) {
                                   return Row(
                                     children: [
                                       GestureDetector(
                                         onTap: () {
                                           setState(() {
-                                            _selectedItemIndex = index; // Update selected index
+                                            _selectedItemIndex = index;
                                           });
                                         },
                                         child: Container(
-                                          margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                                          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8), // Adjusted padding
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 5, vertical: 5),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5, horizontal: 8),
                                           decoration: BoxDecoration(
                                             color: _selectedItemIndex == index
                                                 ? Colors.white
                                                 : Colors.transparent,
-                                            borderRadius: BorderRadius.circular(4),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
                                           ),
                                           child: Text(
-                                            'Item ${index + 1}', // Text for item
+                                            filterLabels[index],
                                             style: TextStyle(
                                               color: _selectedItemIndex == index
-                                                  ? const Color.fromARGB(255, 11, 11, 62) // Corrected color value (blue with full opacity)
+                                                  ? const Color.fromARGB(
+                                                      255, 11, 11, 62)
                                                   : Colors.white,
                                               fontSize: 14,
                                               fontFamily: 'Poppins',
@@ -188,11 +203,11 @@ class _NotificationState extends State<NotificationContainer> {
                                           ),
                                         ),
                                       ),
-                                      if (index < 6) // Add divider between items except for the last one
+                                      if (index < filterLabels.length - 1)
                                         const SizedBox(
-                                          height: 25, // Shorter height for divider
+                                          height: 25,
                                           child: VerticalDivider(
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             thickness: 1,
                                             width: 10,
                                           ),
@@ -204,6 +219,26 @@ class _NotificationState extends State<NotificationContainer> {
                             ),
                           ],
                         ),
+                      ),
+
+                      // Time Filters
+                      const Expanded(
+                        child:
+                            TimeFilters(), // Pass selected filter to TimeFilters
+                      ),
+                      Container(
+                        width: 53,
+                        height: 2,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF2F5B6C),
+                          border: Border.all(
+                            color: const Color(0xFF2F5B6C),
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
                       ),
                     ],
                   ),

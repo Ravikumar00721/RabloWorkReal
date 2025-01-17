@@ -73,6 +73,9 @@ flutter:
     - assets/Globe.svg
     - assets/Vector.svg
     - assets/Pc.svg
+    - assets/Uparrow.svg
+    - assets/downarrow.svg
+    - assets/usercheck.svg
     - assets/exchange.svg
     - assets/locked.svg
     - assets/homeyes.svg
