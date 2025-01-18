@@ -13,161 +13,166 @@ Widget dropdownContent(List<String> timeFilters) {
       children: [
         const SizedBox(height: 8),
         for (var filter in controller.timeFilters)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: Card(
-              elevation: 0,
-              color: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-                side: BorderSide(
-                  color: controller.getColorProperty(filter),
-                  width: 0.5,
-                ),
-              ),
-              child: Container(
-                width: double.infinity,
-                constraints: const BoxConstraints(minHeight: 109),
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: controller.getBackgroundColor(filter),
+          GestureDetector(
+            onTap: () {
+              controller.highlightFilter(filter); // Highlight on tap
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: Card(
+                elevation: 0,
+                color: Colors.transparent,
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(
+                    color: controller.getColorProperty(filter),
+                    width: 0.5,
+                  ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 16,
-                              height: 16,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.blue,
-                              ),
-                              child: Center(
-                                child: SvgPicture.asset(
-                                  controller.getSvgIcon(filter),
-                                  width: 8,
-                                  height: 8,
-                                  color: Colors.white,
+                child: Container(
+                  width: double.infinity,
+                  constraints: const BoxConstraints(minHeight: 109),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: controller.getBackgroundColor(filter),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 16,
+                                height: 16,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.blue,
+                                ),
+                                child: Center(
+                                  child: SvgPicture.asset(
+                                    controller.getSvgIcon(filter),
+                                    width: 8,
+                                    height: 8,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(width: 8),
-                            Text(
-                              filter,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(width: 4),
-                            Container(
-                              width: 2,
-                              height: 2,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(width: 4),
-                            const Text(
-                              "Time",
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SvgPicture.asset(
-                          'assets/Vector.svg',
-                          width: 2,
-                          height: 12,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      "Title Of The Notification",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.white,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    const Text(
-                      "Description of the notification",
-                      style: TextStyle(
-                        fontSize: 8,
-                        color: Colors.white,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 12),
-                              decoration: BoxDecoration(
-                                color: const Color.fromRGBO(184, 254, 34, 1),
-                                borderRadius: BorderRadius.circular(999),
-                              ),
-                              child: const Text(
-                                'CTA1',
-                                style: TextStyle(
-                                  color: Colors.black,
+                              const SizedBox(width: 8),
+                              Text(
+                                filter,
+                                style: const TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 12),
-                              decoration: BoxDecoration(
-                                color: Colors.transparent,
-                                border: Border.all(
                                   color: Colors.white,
-                                  width: 1.5,
                                 ),
-                                borderRadius: BorderRadius.circular(999),
                               ),
-                              child: const Text(
-                                'CTA2',
+                              const SizedBox(width: 4),
+                              Container(
+                                width: 2,
+                                height: 2,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(width: 4),
+                              const Text(
+                                'Time',
                                 style: TextStyle(
-                                  color: Colors.white,
                                   fontSize: 12,
-                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const Text(
-                          'Unread',
-                          style: TextStyle(
-                            color: Color.fromRGBO(184, 254, 34, 1),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
+                            ],
                           ),
+                          SvgPicture.asset(
+                            'assets/Vector.svg',
+                            width: 2,
+                            height: 12,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        "Title Of The Notification",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      const SizedBox(height: 4),
+                      const Text(
+                        "Description of the notification",
+                        style: TextStyle(
+                          fontSize: 8,
+                          color: Colors.white,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4, horizontal: 12),
+                                decoration: BoxDecoration(
+                                  color: controller.getCta1Color(filter),
+                                  borderRadius: BorderRadius.circular(999),
+                                ),
+                                child: const Text(
+                                  'CTA1',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4, horizontal: 12),
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 1.5,
+                                  ),
+                                  borderRadius: BorderRadius.circular(999),
+                                ),
+                                child: const Text(
+                                  'CTA2',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            controller.getReadState(filter),
+                            style: const TextStyle(
+                              color: Colors.blue,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

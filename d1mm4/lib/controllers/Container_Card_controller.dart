@@ -7,6 +7,9 @@ class DropdownController extends GetxController {
   // Map to track the highlighted state for each filter
   final RxMap<String, bool> highlightedFilters = <String, bool>{}.obs;
 
+  // Map to track the read/unread state for each filter
+  final RxMap<String, bool> readStates = <String, bool>{}.obs;
+
   // List of time filters
   final List<String> timeFilters = [
     'Accounts Update',
@@ -18,21 +21,24 @@ class DropdownController extends GetxController {
     'Alert',
   ];
 
-  // Constructor to initialize the highlightedFilters map for each filter
+  // Constructor to initialize the highlightedFilters and readStates map for each filter
   DropdownController() {
     for (var filter in timeFilters) {
       highlightedFilters[filter] = false;
+      readStates[filter] = false; // Default to unread
     }
   }
 
   // Method to highlight a filter
   void highlightFilter(String filter) {
-    highlightedFilters[filter] = true;
+    highlightedFilters[filter] = true; // Highlight card
+    readStates[filter] = true; // Mark as read
     update(); // Notify listeners
 
-    // Reset the highlight after 4 seconds
+    // Reset the highlight and read/unread state after 4 seconds
     Timer(const Duration(seconds: 4), () {
-      highlightedFilters[filter] = false;
+      highlightedFilters[filter] = false; // Remove highlight
+      readStates[filter] = false; // Mark as unread again
       update(); // Notify listeners
     });
   }
@@ -61,18 +67,36 @@ class DropdownController extends GetxController {
 
   // Get the border color based on whether the filter is highlighted
   Color getColorProperty(String filter) {
-    if (highlightedFilters[filter] ?? false) {
-      return Colors.green; // Highlighted border color
+    if (filter == 'Alert') {
+      return highlightedFilters[filter]!
+          ? Colors.red
+          : const Color.fromRGBO(85, 166, 196, 0.3); // Green for highlight
     }
-    return const Color.fromRGBO(5, 50, 43, 0.9411764705882353);
+    return highlightedFilters[filter]!
+        ? Colors.green
+        : const Color.fromRGBO(5, 50, 43, 0.94);
   }
 
   // Get the background color based on whether the filter is highlighted
   Color getBackgroundColor(String filter) {
-    if (highlightedFilters[filter] ?? false) {
-      return const Color.fromRGBO(
-          2, 179, 243, 0.9411764705882353); // Highlighted background color
+    if (filter == 'Alert') {
+      return Colors.transparent; // Always red for "Alert"
     }
-    return Colors.transparent;
+    return highlightedFilters[filter]!
+        ? const Color.fromRGBO(85, 166, 196, 0.3)
+        : Colors.transparent;
+  }
+
+  // Get the CTA1 color for a specific filter
+  Color getCta1Color(String filter) {
+    if (filter == 'Alert') {
+      return Colors.red; // Always red for "Alert"
+    }
+    return const Color.fromRGBO(184, 254, 34, 1); // Default CTA1 color
+  }
+
+  // Get the read/unread text for a filter
+  String getReadState(String filter) {
+    return readStates[filter]! ? 'read' : 'unread';
   }
 }
