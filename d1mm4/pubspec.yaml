@@ -78,6 +78,7 @@ flutter:
     - assets/usercheck.svg
     - assets/exchange.svg
     - assets/locked.svg
+    - assets/profession.svg
     - assets/homeyes.svg
     - assets/personno.svg
     - assets/icon.svg

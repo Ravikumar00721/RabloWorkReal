@@ -1,27 +1,30 @@
-import 'package:d1mm4/components/MyPlan.dart';
 import 'package:d1mm4/components/D1CM6.dart';
+import 'package:d1mm4/components/MyPlan.dart';
 import 'package:d1mm4/components/Step_4.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:d1mm4/controllers/card_controller.dart';
+import 'package:d1mm4/components/accessiblitybox.dart';
 import 'package:d1mm4/components/app_bar_1.dart';
 import 'package:d1mm4/components/custom_bottom_navigation_bar.dart';
-import 'package:d1mm4/components/welcomebox.dart';
-import 'package:d1mm4/components/accessiblitybox.dart';
-import 'package:d1mm4/components/quickinfo.dart';
 import 'package:d1mm4/components/horizontalinforbox.dart';
+import 'package:d1mm4/components/quickinfo.dart';
+import 'package:d1mm4/components/welcomebox.dart';
+import 'package:d1mm4/controllers/card_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'components/Buisness_Account.dart';
+import 'components/Container.dart';
 import 'components/Progress_Lost.dart';
 import 'components/Step5.dart';
 import 'components/Verification.dart';
-import 'controllers/btm_navigation_bar_controller.dart';
 import 'components/hamburger.dart'; // Import Hamburger widget
-import 'components/Container.dart';
+import 'controllers/Container_Card_controller.dart';
+import 'controllers/btm_navigation_bar_controller.dart';
 
 void main() {
   // Initialize GetX controllers globally
   Get.put(BottomNavigationController()); // Initialize NavigationController
-  Get.put(CardController()); // Initialize CardController
+  Get.put(CardController());
+  Get.put(DropdownController()); // Initialize CardController
   runApp(const MyApp());
 }
 
@@ -87,7 +90,8 @@ class _HomePageState extends State<HomePage> {
         return false;
       },
       child: Scaffold(
-        extendBodyBehindAppBar: true, // Allow the body to extend behind the app bar
+        extendBodyBehindAppBar:
+            true, // Allow the body to extend behind the app bar
         body: Stack(
           children: [
             // Background layers

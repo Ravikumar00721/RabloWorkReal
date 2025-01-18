@@ -1,7 +1,6 @@
+import 'package:d1mm4/components/Container_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'Container_item_card.dart';
 
 class TimeFilters extends StatefulWidget {
   const TimeFilters({super.key});
@@ -27,12 +26,18 @@ class _TimeFiltersState extends State<TimeFilters> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 8),
+      alignment: Alignment.topCenter, // Ensure alignment to top
       child: ListView.builder(
+        physics: const AlwaysScrollableScrollPhysics(), // Enable scrolling
         itemCount: timeFilters.length,
+        padding: EdgeInsets.zero, // Remove extra padding
         itemBuilder: (context, index) {
           return ListTile(
             contentPadding: EdgeInsets.zero,
             title: Row(
+              crossAxisAlignment: CrossAxisAlignment.start, // Align to start
+              mainAxisAlignment:
+                  MainAxisAlignment.start, // Align items to start
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
@@ -45,7 +50,7 @@ class _TimeFiltersState extends State<TimeFilters> {
                     ),
                   ),
                 ),
-                Expanded(child: Container()),
+                const Spacer(), // Push the arrow to the right
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -67,8 +72,7 @@ class _TimeFiltersState extends State<TimeFilters> {
               ],
             ),
             subtitle: _isDropdownOpen[index]
-                ? dropdownContent(
-                    timeFilters[index]) // Use the dropdown content function
+                ? dropdownContent(timeFilters) // Provide dropdown content
                 : null,
           );
         },

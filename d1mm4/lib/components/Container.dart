@@ -2,7 +2,9 @@ import 'dart:ui'; // Required for BackdropFilter
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart'; // Import GetX
 
+import '../controllers/Container_Card_controller.dart';
 import 'ContainerItem.dart';
 
 class NotificationContainer extends StatefulWidget {
@@ -21,6 +23,10 @@ class NotificationContainer extends StatefulWidget {
 
 class _NotificationState extends State<NotificationContainer> {
   int _selectedItemIndex = -1; // Track the selected item index
+
+  // Initialize the DropdownController
+  final DropdownController controller =
+      Get.find(); // Get the controller instance
 
   @override
   Widget build(BuildContext context) {
@@ -176,6 +182,8 @@ class _NotificationState extends State<NotificationContainer> {
                                           setState(() {
                                             _selectedItemIndex = index;
                                           });
+                                          controller.highlightFilter(filterLabels[
+                                              index]); // Highlight the filter in the controller
                                         },
                                         child: Container(
                                           margin: const EdgeInsets.symmetric(
