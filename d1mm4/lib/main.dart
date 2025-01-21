@@ -17,6 +17,7 @@ import 'components/Progress_Lost.dart';
 import 'components/Step5.dart';
 import 'components/Verification.dart';
 import 'components/hamburger.dart'; // Import Hamburger widget
+import 'components/kyc.dart';
 import 'controllers/Container_Card_controller.dart';
 import 'controllers/btm_navigation_bar_controller.dart';
 
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/', page: () => const HomePage()),
         GetPage(name: '/business-account', page: () => const BusinessAccount()),
         GetPage(name: '/verification', page: () => const Verification()),
+        GetPage(name: '/kyc', page: () => const KYC()),
         GetPage(name: '/step4', page: () => const Step4()),
         GetPage(name: '/step5', page: () => const Step5()),
         GetPage(name: '/myplan', page: () => const Myplan()),

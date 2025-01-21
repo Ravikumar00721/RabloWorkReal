@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 import '../controllers/card_controller.dart';
 
-class Step5 extends StatelessWidget {
-  const Step5({super.key});
+class KYC extends StatelessWidget {
+  const KYC({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +12,7 @@ class Step5 extends StatelessWidget {
 
     return WillPopScope(
       onWillPop: () async {
+        // Decrement current step on back navigation
         if (controller.currentStep.value > 0) {
           controller.currentStep.value--;
           print("Step decremented: ${controller.currentStep.value}");
@@ -20,7 +21,7 @@ class Step5 extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Step5"),
+          title: const Text("KYC"),
           backgroundColor: const Color(0xFF2F5B6C),
         ),
         body: Center(
@@ -28,7 +29,7 @@ class Step5 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Step5',
+                'KYC',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -41,7 +42,8 @@ class Step5 extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(200, 50),
-                  backgroundColor: const Color.fromRGBO(184, 254, 34, 1),
+                  backgroundColor:
+                      const Color.fromRGBO(184, 254, 34, 1), // Button color
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),

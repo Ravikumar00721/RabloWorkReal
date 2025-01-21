@@ -97,6 +97,24 @@ class DropdownController extends GetxController {
 
   // Get the read/unread text for a filter
   String getReadState(String filter) {
-    return readStates[filter]! ? 'read' : 'unread';
+    return readStates[filter]! ? 'unread' : 'read';
+  }
+
+  // Get the color for the circular indicator
+  Color getColorFilter(String filter) {
+    switch (filter) {
+      case 'Accounts Update':
+      case 'Business Update':
+        return Colors.blue;
+      case 'Finance and Transaction':
+      case 'Memberships Update':
+      case 'Customer\'s Update and Reminders':
+      case 'Promotion & Offers':
+        return Colors.green;
+      case 'Alert':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
   }
 }

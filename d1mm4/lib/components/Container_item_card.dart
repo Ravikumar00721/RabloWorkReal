@@ -15,7 +15,7 @@ Widget dropdownContent(List<String> timeFilters) {
         for (var filter in controller.timeFilters)
           GestureDetector(
             onTap: () {
-              controller.highlightFilter(filter); // Highlight on tap
+              controller.highlightFilter(filter);
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -50,7 +50,7 @@ Widget dropdownContent(List<String> timeFilters) {
                                 height: 16,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Colors.blue,
+                                  color: controller.getColorFilter(filter),
                                 ),
                                 child: Center(
                                   child: SvgPicture.asset(
@@ -163,8 +163,10 @@ Widget dropdownContent(List<String> timeFilters) {
                           ),
                           Text(
                             controller.getReadState(filter),
-                            style: const TextStyle(
-                              color: Colors.blue,
+                            style: TextStyle(
+                              color: controller.getReadState(filter) == 'read'
+                                  ? Colors.blue
+                                  : const Color.fromRGBO(184, 254, 34, 1),
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                             ),

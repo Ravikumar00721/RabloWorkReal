@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import '../controllers/card_controller.dart';
 
 class CustomCard extends StatelessWidget {
@@ -8,7 +9,8 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CardController controller = Get.find<CardController>(); // Get the instance of CardController
+    final CardController controller =
+        Get.find<CardController>(); // Get the instance of CardController
 
     final double deviceHeight = MediaQuery.of(context).size.height;
 
@@ -30,9 +32,8 @@ class CustomCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // "Welcome Back!" with less italic effect
                   Transform(
-                    transform: Matrix4.skewX(-0.1), // Less italic effect
+                    transform: Matrix4.skewX(-0.1),
                     child: const Text(
                       'Welcome Back!',
                       style: TextStyle(
@@ -60,72 +61,134 @@ class CustomCard extends StatelessWidget {
               ),
               Row(
                 children: [
-                  // Steps
                   Expanded(
                     child: Row(
                       children: List.generate(5, (index) {
                         return Row(
                           children: [
-                            Obx(() => CircleAvatar(
-                              backgroundColor:
-                              controller.currentStep.value >= index
-                                  ? const Color.fromRGBO(184, 254, 34, 1)
-                                  : Colors.grey,
-                              child: SvgPicture.asset(
-                                'assets/step${index + 1}.svg',
-                                width: 14,
-                                height: 14,
-                                color: controller.currentStep.value >= index
-                                    ? const Color(0xFF003366)
-                                    : Colors.white,
-                              ),
-                            )),
-
-                            if (index < 4)
-                              Obx(() => SizedBox(
-                                width: 24,
-                                child: Container(
-                                  height: 6,
-                                  color: controller.currentStep.value > index
+                            Obx(() {
+                              // Handle the special styling for verification (step 2) and KYC (step 3)
+                              if (index == 2) {
+                                return Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    CircleAvatar(
+                                      backgroundColor: Colors.grey,
+                                      radius: 20,
+                                    ),
+                                    Row(
+                                      children: [
+                                        // Left half of the circle (green color for verification)
+                                        Container(
+                                          width: 20,
+                                          height: 38,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                controller.currentStep.value >=
+                                                        2
+                                                    ? const Color.fromRGBO(
+                                                        184, 254, 34, 1)
+                                                    : Colors.grey,
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(16),
+                                              bottomLeft: Radius.circular(16),
+                                            ),
+                                          ),
+                                        ),
+                                        // Right half of the circle (blue color for KYC)
+                                        Container(
+                                          width: 20,
+                                          height: 38,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                controller.currentStep.value >=
+                                                        2.5
+                                                    ? const Color.fromRGBO(
+                                                        184, 254, 34, 1)
+                                                    : Colors.grey,
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topRight: Radius.circular(16),
+                                              bottomRight: Radius.circular(16),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SvgPicture.asset(
+                                      'assets/step${index + 1}.svg',
+                                      width: 14,
+                                      height: 14,
+                                      color:
+                                          controller.currentStep.value >= index
+                                              ? const Color(0xFF003366)
+                                              : Colors.white,
+                                    ),
+                                  ],
+                                );
+                              } else {
+                                return CircleAvatar(
+                                  backgroundColor: controller
+                                              .currentStep.value >=
+                                          index
                                       ? const Color.fromRGBO(184, 254, 34, 1)
                                       : Colors.grey,
-                                ),
-                              )),
+                                  child: SvgPicture.asset(
+                                    'assets/step${index + 1}.svg',
+                                    width: 14,
+                                    height: 14,
+                                    color: controller.currentStep.value >= index
+                                        ? const Color(0xFF003366)
+                                        : Colors.white,
+                                  ),
+                                );
+                              }
+                            }),
+                            if (index < 4)
+                              Obx(() => SizedBox(
+                                    width: 24,
+                                    child: Container(
+                                      height: 6,
+                                      color:
+                                          controller.currentStep.value > index
+                                              ? const Color.fromRGBO(
+                                                  184, 254, 34, 1)
+                                              : Colors.grey,
+                                    ),
+                                  )),
                           ],
                         );
                       }),
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: 4),
                   const SizedBox(
-                    height: 25, // Shorter height for divider
+                    height: 25,
                     child: VerticalDivider(
                       color: Colors.white,
                       thickness: 1,
                       width: 10,
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  // Percentage Text with less italic effect
+                  const SizedBox(width: 4),
                   Obx(() => Transform(
-                    transform: Matrix4.skewX(-0.1), // Less italic effect
-                    child: Text(
-                      '${controller.currentPercentage}%',
-                      style: const TextStyle(
-                        fontFamily: 'Barlow Semi Condensed',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
-                        height: 1.2,
-                        color: Colors.white,
-                      ),
-                    ),
-                  )),
+                        transform: Matrix4.skewX(-0.1),
+                        child: Text(
+                          '${controller.currentPercentage}%',
+                          style: const TextStyle(
+                            fontFamily: 'Barlow Semi Condensed',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20,
+                            height: 1.2,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )),
                 ],
               ),
-              //Change Step Logic
               ElevatedButton(
                 onPressed: () {
-                  // Instantly update the step
                   controller.changeStep();
                 },
                 style: ElevatedButton.styleFrom(
@@ -137,15 +200,15 @@ class CustomCard extends StatelessWidget {
                   ),
                 ),
                 child: Obx(() => Text(
-                  controller.currentButtonText,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    height: 1.5,
-                    color: Color(0xFF121212),
-                    fontFamily: 'Poppins',
-                  ),
-                )),
+                      controller.currentButtonText,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        height: 1.5,
+                        color: Color(0xFF121212),
+                        fontFamily: 'Poppins',
+                      ),
+                    )),
               ),
             ],
           ),
