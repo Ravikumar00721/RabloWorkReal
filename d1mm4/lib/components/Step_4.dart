@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/card_controller.dart';
+
+import '../controllers/welcome_card_controller.dart';
 
 class Step4 extends StatelessWidget {
   const Step4({super.key});

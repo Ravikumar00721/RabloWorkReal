@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/card_controller.dart';
+import '../controllers/welcome_card_controller.dart';
 
 class KYC extends StatelessWidget {
   const KYC({super.key});

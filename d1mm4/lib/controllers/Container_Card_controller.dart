@@ -29,17 +29,31 @@ class DropdownController extends GetxController {
     }
   }
 
-  // Method to highlight a filter
   void highlightFilter(String filter) {
-    highlightedFilters[filter] = true; // Highlight card
-    readStates[filter] = true; // Mark as read
-    update(); // Notify listeners
+    if (filter == 'All') {
+      // Mark all filters as highlighted and read
+      highlightedFilters.forEach((key, value) {
+        highlightedFilters[key] = true;
+        readStates[key] = true;
+      });
+    } else {
+      highlightedFilters[filter] = true;
+      readStates[filter] = true;
+    }
+    update();
 
-    // Reset the highlight and read/unread state after 4 seconds
+    // Reset highlight and read/unread states after 4 seconds
     Timer(const Duration(seconds: 4), () {
-      highlightedFilters[filter] = false; // Remove highlight
-      readStates[filter] = false; // Mark as unread again
-      update(); // Notify listeners
+      if (filter == 'All') {
+        highlightedFilters.forEach((key, value) {
+          highlightedFilters[key] = false;
+          readStates[key] = false;
+        });
+      } else {
+        highlightedFilters[filter] = false;
+        readStates[filter] = false;
+      }
+      update();
     });
   }
 
@@ -80,7 +94,9 @@ class DropdownController extends GetxController {
   // Get the background color based on whether the filter is highlighted
   Color getBackgroundColor(String filter) {
     if (filter == 'Alert') {
-      return Colors.transparent; // Always red for "Alert"
+      return highlightedFilters[filter]!
+          ? const Color.fromRGBO(85, 166, 196, 0.3)
+          : Colors.transparent; // Always red for "Alert"
     }
     return highlightedFilters[filter]!
         ? const Color.fromRGBO(85, 166, 196, 0.3)
@@ -90,7 +106,7 @@ class DropdownController extends GetxController {
   // Get the CTA1 color for a specific filter
   Color getCta1Color(String filter) {
     if (filter == 'Alert') {
-      return Colors.red; // Always red for "Alert"
+      return Color.fromRGBO(223, 0, 48, 1); // Always red for "Alert"
     }
     return const Color.fromRGBO(184, 254, 34, 1); // Default CTA1 color
   }
@@ -105,14 +121,30 @@ class DropdownController extends GetxController {
     switch (filter) {
       case 'Accounts Update':
       case 'Business Update':
-        return Colors.blue;
+        return Color.fromRGBO(85, 166, 196, 1);
       case 'Finance and Transaction':
       case 'Memberships Update':
       case 'Customer\'s Update and Reminders':
       case 'Promotion & Offers':
-        return Colors.green;
+        return const Color.fromRGBO(184, 254, 34, 1);
       case 'Alert':
-        return Colors.red;
+        return Color.fromRGBO(223, 0, 48, 1);
+      default:
+        return Colors.grey;
+    }
+  }
+
+  Color getNameColor(String filter) {
+    switch (filter) {
+      case 'Finance and Transaction':
+      case 'Memberships Update':
+      case 'Customer\'s Update and Reminders':
+        return const Color.fromRGBO(184, 254, 34, 1);
+      case 'Promotion & Offers':
+      case 'Alert':
+      case 'Accounts Update':
+      case 'Business Update':
+        return Colors.white;
       default:
         return Colors.grey;
     }

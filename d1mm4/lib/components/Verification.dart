@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/card_controller.dart';
+
+import '../controllers/welcome_card_controller.dart';
 
 class Verification extends StatelessWidget {
   const Verification({super.key});
@@ -41,7 +42,8 @@ class Verification extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(200, 50),
-                  backgroundColor: const Color.fromRGBO(184, 254, 34, 1), // Button color
+                  backgroundColor:
+                      const Color.fromRGBO(184, 254, 34, 1), // Button color
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),

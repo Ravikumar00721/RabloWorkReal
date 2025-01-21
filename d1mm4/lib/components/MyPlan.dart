@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/card_controller.dart';
 
 class Myplan extends StatelessWidget {
   const Myplan({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Myplan"),
@@ -31,7 +29,9 @@ class Myplan extends StatelessWidget {
               },
               child: const Text("Done"),
               style: ElevatedButton.styleFrom(
-                minimumSize: const Size(200, 50), backgroundColor: const Color.fromRGBO(184, 254, 34, 1), // Button color
+                minimumSize: const Size(200, 50),
+                backgroundColor:
+                    const Color.fromRGBO(184, 254, 34, 1), // Button color
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),

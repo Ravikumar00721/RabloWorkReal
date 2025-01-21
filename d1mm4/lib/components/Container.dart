@@ -32,7 +32,7 @@ class _NotificationState extends State<NotificationContainer> {
   Widget build(BuildContext context) {
     final double notiWidth =
         MediaQuery.of(context).size.width; // Full screen width
-    final double notiHeight = 755; // Notification height
+    final double notiHeight = 760; // Notification height
     final double startPosition = -notiHeight; // Hidden above the screen
     final double visiblePosition = 0; // Fully visible at the top of the screen
 

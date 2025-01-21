@@ -16,12 +16,15 @@ class CardController extends GetxController {
 
   // Change step with conditional increments based on current value
   void changeStep() {
+    if (currentStep.value >= 4) {
+      print("Already at the last step, no further action needed.");
+      return;
+    }
+
     if (currentStep.value == 2) {
       currentStep.value += 0.5; // Increment by 0.5 if current step is 2
     } else if (currentStep.value == 2.5) {
-      currentStep.value += 0.5; // Increment by 1 if current step is 3
-    } else if (currentStep.value == 4) {
-      currentStep.value += 1;
+      currentStep.value += 0.5; // Increment by 0.5 if current step is 2.5
     } else {
       currentStep.value += 1;
     }

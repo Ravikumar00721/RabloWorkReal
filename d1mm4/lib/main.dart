@@ -7,7 +7,7 @@ import 'package:d1mm4/components/custom_bottom_navigation_bar.dart';
 import 'package:d1mm4/components/horizontalinforbox.dart';
 import 'package:d1mm4/components/quickinfo.dart';
 import 'package:d1mm4/components/welcomebox.dart';
-import 'package:d1mm4/controllers/card_controller.dart';
+import 'package:d1mm4/controllers/welcome_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

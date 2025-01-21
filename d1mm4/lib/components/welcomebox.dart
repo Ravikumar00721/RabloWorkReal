@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../controllers/card_controller.dart';
+import '../controllers/welcome_card_controller.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({super.key});
@@ -145,18 +145,29 @@ class CustomCard extends StatelessWidget {
                                 );
                               }
                             }),
+                            //this is bars between steps
                             if (index < 4)
-                              Obx(() => SizedBox(
-                                    width: 24,
-                                    child: Container(
-                                      height: 6,
-                                      color:
-                                          controller.currentStep.value > index
-                                              ? const Color.fromRGBO(
-                                                  184, 254, 34, 1)
-                                              : Colors.grey,
-                                    ),
-                                  )),
+                              Obx(() {
+                                bool isStepCompleted =
+                                    controller.currentStep.value > index;
+
+                                // Special case for step 2 to 2.5 transition
+                                if (index == 2 &&
+                                    controller.currentStep.value == 2.5) {
+                                  isStepCompleted =
+                                      false; // Prevent color change until fully completed
+                                }
+
+                                return SizedBox(
+                                  width: 24,
+                                  child: Container(
+                                    height: 6,
+                                    color: isStepCompleted
+                                        ? const Color.fromRGBO(184, 254, 34, 1)
+                                        : Colors.grey,
+                                  ),
+                                );
+                              }),
                           ],
                         );
                       }),

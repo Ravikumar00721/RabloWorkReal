@@ -64,9 +64,9 @@ Widget dropdownContent(List<String> timeFilters) {
                               const SizedBox(width: 8),
                               Text(
                                 filter,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 12,
-                                  color: Colors.white,
+                                  color: controller.getNameColor(filter),
                                 ),
                               ),
                               const SizedBox(width: 4),
@@ -129,10 +129,12 @@ Widget dropdownContent(List<String> timeFilters) {
                                   color: controller.getCta1Color(filter),
                                   borderRadius: BorderRadius.circular(999),
                                 ),
-                                child: const Text(
+                                child: Text(
                                   'CTA1',
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: filter == 'Alert'
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
                                   ),
