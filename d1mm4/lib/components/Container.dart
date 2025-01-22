@@ -46,7 +46,7 @@ class _NotificationState extends State<NotificationContainer> {
       'Promotion & Offers',
       'Alert'
     ];
-
+// container
     return Stack(
       children: [
         if (widget.isVisible)
