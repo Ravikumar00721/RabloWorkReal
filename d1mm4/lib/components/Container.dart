@@ -46,7 +46,7 @@ class _NotificationState extends State<NotificationContainer> {
       'Promotion & Offers',
       'Alert'
     ];
-// container
+
     return Stack(
       children: [
         if (widget.isVisible)
@@ -67,11 +67,10 @@ class _NotificationState extends State<NotificationContainer> {
             width: notiWidth,
             height: notiHeight,
             padding: const EdgeInsets.only(
-              top: 40,
               right: 8,
               bottom: 20,
               left: 8,
-            ),
+            ), // Removed top padding
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20),
@@ -85,15 +84,15 @@ class _NotificationState extends State<NotificationContainer> {
                   decoration: BoxDecoration(
                     color: const Color.fromRGBO(85, 166, 196, 0.3),
                   ),
+                  padding: const EdgeInsets.only(top: 40),
                   child: Column(
                     children: [
                       // Header
                       Container(
                         margin: const EdgeInsets.only(
-                          top: 40,
                           left: 8,
                           right: 8,
-                        ),
+                        ), // Removed top margin
                         padding: const EdgeInsets.symmetric(
                           vertical: 16,
                           horizontal: 8,
@@ -182,8 +181,8 @@ class _NotificationState extends State<NotificationContainer> {
                                           setState(() {
                                             _selectedItemIndex = index;
                                           });
-                                          controller.highlightFilter(filterLabels[
-                                              index]); // Highlight the filter in the controller
+                                          controller.highlightFilter(
+                                              filterLabels[index]);
                                         },
                                         child: Container(
                                           margin: const EdgeInsets.symmetric(
@@ -229,7 +228,7 @@ class _NotificationState extends State<NotificationContainer> {
                         ),
                       ),
 
-                      // Time Filters
+                      // Time Filters (Placeholder widget)
                       const Expanded(
                         child:
                             TimeFilters(), // Pass selected filter to TimeFilters
@@ -245,9 +244,7 @@ class _NotificationState extends State<NotificationContainer> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                     ],
                   ),
                 ),
