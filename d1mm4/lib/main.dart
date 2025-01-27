@@ -19,13 +19,10 @@ import 'components/Verification.dart';
 import 'components/hamburger.dart'; // Import Hamburger widget
 import 'components/kyc.dart';
 import 'controllers/Container_Card_controller.dart';
-import 'controllers/btm_navigation_bar_controller.dart';
 
 void main() {
-  // Initialize GetX controllers globally
-  Get.put(BottomNavigationController()); // Initialize NavigationController
   Get.put(CardController());
-  Get.put(DropdownController()); // Initialize CardController
+  Get.put(DropdownController());
   runApp(const MyApp());
 }
 
@@ -41,7 +38,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const HomePage(),
-      // Define routes
       getPages: [
         GetPage(name: '/', page: () => const HomePage()),
         GetPage(name: '/business-account', page: () => const BusinessAccount()),
@@ -67,14 +63,12 @@ class _HomePageState extends State<HomePage> {
   bool _isHamburgerVisible = false;
   bool _NotiVisible = false;
 
-  // Toggle the visibility of the hamburger menu
   void _toggleHamburgerVisibility() {
     setState(() {
       _isHamburgerVisible = !_isHamburgerVisible;
     });
   }
 
-  // Toggle the visibility of the notification container
   void _toggleNotiVisiblty() {
     setState(() {
       _NotiVisible = !_NotiVisible;
@@ -92,11 +86,9 @@ class _HomePageState extends State<HomePage> {
         return false;
       },
       child: Scaffold(
-        extendBodyBehindAppBar:
-            true, // Allow the body to extend behind the app bar
+        extendBodyBehindAppBar: true,
         body: Stack(
           children: [
-            // Background layers
             Positioned.fill(
               child: Image.asset(
                 'assets/background.png',
@@ -113,33 +105,41 @@ class _HomePageState extends State<HomePage> {
                 color: const Color(0xFF063434).withOpacity(0.8),
               ),
             ),
-            // Main content
             Positioned(
-              top: 50,
+              top: deviceHeight * 0.06, // 6% from top
               left: 0,
               right: 0,
               bottom: 0,
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(8, 119, 8, 0),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(
+                  deviceWidth * 0.02, // 2% left padding
+                  deviceHeight * 0.15, // 15% top padding
+                  deviceWidth * 0.02, // 2% right padding
+                  0,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const CustomCard(),
-                    const SizedBox(height: 10),
+                    SizedBox(height: deviceHeight * 0.01), // 1% height spacing
                     Component2(),
                     const Component3(),
                     const Component4(),
                     Container(
-                      margin: const EdgeInsets.only(top: 59),
+                      margin: EdgeInsets.only(
+                          top: deviceHeight * 0.05), // 7% margin top
                       child: const Component5(),
+                    ),
+                    // Add an Expanded widget to ensure no overflow
+                    Expanded(
+                      child: Container(), // Placeholder to avoid overflow
                     ),
                   ],
                 ),
               ),
             ),
-            // Custom AppBar in the stack
             Positioned(
-              top: 19, // Adjust the position of the app bar
+              top: deviceHeight * 0.025, // 2.5% from top
               left: 0,
               right: 0,
               child: CustomAppBar(
@@ -147,12 +147,10 @@ class _HomePageState extends State<HomePage> {
                 onFrameTap: _toggleNotiVisiblty,
               ),
             ),
-            // Hamburger Menu
             Hamburger(
               isVisible: _isHamburgerVisible,
               onBackgroundTap: _toggleHamburgerVisibility,
             ),
-            // Notification Container (placed above the app bar)
             NotificationContainer(
               isVisible: _NotiVisible,
               onBackgroundTap: _toggleNotiVisiblty,
@@ -167,7 +165,7 @@ class _HomePageState extends State<HomePage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return const ExitDialog(); // Use the ExitDialog widget
+        return const ExitDialog();
       },
     );
   }

@@ -1,7 +1,7 @@
+import 'package:d1mm4/controllers/accessibility_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:d1mm4/controllers/accessibility_controller.dart';
 
 class Component2 extends StatelessWidget {
   // Instantiate the AccessibilityController
@@ -10,16 +10,19 @@ class Component2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = MediaQuery.of(context).size.height;
+    final double deviceWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      width: double.infinity,
-      height: deviceHeight * 0.1,
+      width: deviceWidth, // Use full device width
+      height: deviceHeight * 0.1, // Use a fraction of the device height
       decoration: BoxDecoration(
         color: const Color(0xFF2F5B6C),
         borderRadius: BorderRadius.circular(15),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        padding: EdgeInsets.symmetric(
+            horizontal: deviceWidth * 0.02,
+            vertical: deviceHeight * 0.02), // Make padding responsive
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -55,6 +58,10 @@ class Component2 extends StatelessWidget {
     required String text,
   }) {
     final double deviceWidth = MediaQuery.of(context).size.width;
+    final double itemWidth =
+        deviceWidth * 0.2; // Use responsive width for each item
+    final double itemHeight =
+        deviceWidth * 0.12; // Adjust height based on width for better scaling
 
     return GestureDetector(
       onTap: () {
@@ -67,11 +74,12 @@ class Component2 extends StatelessWidget {
         }
       },
       child: Obx(() {
-        String iconPath = controller.getIconPath(index); // Get icon path from the controller
+        String iconPath =
+            controller.getIconPath(index); // Get icon path from the controller
 
         return Container(
-          width: deviceWidth * 0.2,
-          height: 46,
+          width: itemWidth,
+          height: itemHeight,
           decoration: BoxDecoration(
             color: const Color(0xFF2F5B6C),
             borderRadius: BorderRadius.circular(8),
@@ -80,8 +88,9 @@ class Component2 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 32,
-                height: 32,
+                width: itemWidth * 0.5, // Scale icon size based on item width
+                height:
+                    itemHeight * 0.7, // Scale icon size based on item height
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.1),
@@ -92,7 +101,8 @@ class Component2 extends StatelessWidget {
                   width: 16,
                   height: 16,
                   color: controller.isEnabled[index]
-                      ? const Color.fromARGB(255, 255, 255, 255) // Change color to white when active
+                      ? const Color.fromARGB(255, 255, 255,
+                          255) // Change color to white when active
                       : Colors.grey, // Locked state color
                 ),
               ),
