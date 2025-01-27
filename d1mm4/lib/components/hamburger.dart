@@ -46,10 +46,13 @@ class _HamburgerState extends State<Hamburger> {
 
         // Hamburger menu with sliding effect
         AnimatedPositioned(
-          duration: const Duration(milliseconds: 300), // Duration of the animation
+          duration:
+              const Duration(milliseconds: 300), // Duration of the animation
           curve: Curves.easeInOut, // Smooth animation curve
           top: appBarHeight,
-          right: widget.isVisible ? 20 : -menuWidth, // Slide in/out based on visibility
+          right: widget.isVisible
+              ? 20
+              : -menuWidth, // Slide in/out based on visibility
           child: Container(
             width: menuWidth,
             height: menuHeight,
@@ -58,7 +61,7 @@ class _HamburgerState extends State<Hamburger> {
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.only(
-              top: 40,
+              top: 35,
               right: 8,
               bottom: 40,
               left: 8,

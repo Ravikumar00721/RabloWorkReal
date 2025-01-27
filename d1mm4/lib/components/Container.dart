@@ -23,16 +23,15 @@ class NotificationContainer extends StatefulWidget {
 
 class _NotificationState extends State<NotificationContainer> {
   int _selectedItemIndex = -1; // Track the selected item index
-
-  // Initialize the DropdownController
-  final DropdownController controller =
-      Get.find(); // Get the controller instance
+  final DropdownController controller = Get.put(DropdownController());
 
   @override
   Widget build(BuildContext context) {
+    // Get device width and height using MediaQuery
     final double notiWidth =
         MediaQuery.of(context).size.width; // Full screen width
-    final double notiHeight = 760; // Notification height
+    final double notiHeight =
+        MediaQuery.of(context).size.height * 0.75; // 75% of the screen height
     final double startPosition = -notiHeight; // Hidden above the screen
     final double visiblePosition = 0; // Fully visible at the top of the screen
 
@@ -160,7 +159,8 @@ class _NotificationState extends State<NotificationContainer> {
                             ),
                             const SizedBox(width: 7),
                             Container(
-                              width: 295,
+                              width:
+                                  notiWidth - 117, // Full width minus padding
                               height: 49,
                               decoration: BoxDecoration(
                                 color: const Color.fromRGBO(85, 166, 196, 0.3),

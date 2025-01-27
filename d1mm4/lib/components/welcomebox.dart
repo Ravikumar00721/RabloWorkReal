@@ -9,22 +9,24 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CardController controller =
-        Get.find<CardController>(); // Get the instance of CardController
-
+    final CardController controller = Get.put(CardController());
+    final double deviceWidth = MediaQuery.of(context).size.width;
     final double deviceHeight = MediaQuery.of(context).size.height;
+
+    // Calculate dynamic border radius
+    final double borderRadius = deviceWidth * 0.05; // 5% of the screen width
 
     return Card(
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(borderRadius),
       ),
       color: const Color(0xFF2F5B6C),
       child: SizedBox(
-        width: double.infinity,
-        height: deviceHeight * 0.25,
+        width: deviceWidth * 1.0, // 90% of the screen width
+        height: deviceHeight * 0.25, // 25% of the screen height
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(deviceWidth * 0.04),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,23 +36,22 @@ class CustomCard extends StatelessWidget {
                 children: [
                   Transform(
                     transform: Matrix4.skewX(-0.1),
-                    child: const Text(
+                    child: Text(
                       'Welcome Back!',
                       style: TextStyle(
-                        fontSize: 25,
+                        fontSize: deviceWidth * 0.065,
                         fontWeight: FontWeight.w900,
-                        color: Color(0xFFFFFFFF),
+                        color: const Color(0xFFFFFFFF),
                         fontFamily: 'Barlow Semi Condensed',
-                        fontStyle: FontStyle.normal,
                         letterSpacing: 1.0,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 3),
-                  const Text(
+                  SizedBox(height: deviceHeight * 0.01),
+                  Text(
                     'You are One-Step Closer to creating your App',
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: deviceWidth * 0.035,
                       fontWeight: FontWeight.w400,
                       color: Colors.white,
                       fontFamily: 'Poppins',
@@ -67,21 +68,27 @@ class CustomCard extends StatelessWidget {
                         return Row(
                           children: [
                             Obx(() {
-                              // Handle the special styling for verification (step 2) and KYC (step 3)
+                              final double deviceWidth =
+                                  MediaQuery.of(context).size.width;
+                              final double circleRadius = deviceWidth *
+                                  0.05; // 5% of the screen width for radius
+                              final double containerHeight = deviceWidth *
+                                  0.10; // 8% of the screen width for container height
+
                               if (index == 2) {
                                 return Stack(
                                   alignment: Alignment.center,
                                   children: [
                                     CircleAvatar(
                                       backgroundColor: Colors.grey,
-                                      radius: 20,
+                                      radius:
+                                          circleRadius, // Dynamic radius for CircleAvatar
                                     ),
                                     Row(
                                       children: [
-                                        // Left half of the circle (green color for verification)
                                         Container(
                                           width: 20,
-                                          height: 38,
+                                          height: containerHeight,
                                           decoration: BoxDecoration(
                                             color:
                                                 controller.currentStep.value >=
@@ -96,10 +103,9 @@ class CustomCard extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        // Right half of the circle (blue color for KYC)
                                         Container(
                                           width: 20,
-                                          height: 38,
+                                          height: containerHeight,
                                           decoration: BoxDecoration(
                                             color:
                                                 controller.currentStep.value >=
@@ -134,6 +140,8 @@ class CustomCard extends StatelessWidget {
                                           index
                                       ? const Color.fromRGBO(184, 254, 34, 1)
                                       : Colors.grey,
+                                  radius:
+                                      circleRadius, // Dynamic radius for CircleAvatar
                                   child: SvgPicture.asset(
                                     'assets/step${index + 1}.svg',
                                     width: 14,
@@ -145,21 +153,17 @@ class CustomCard extends StatelessWidget {
                                 );
                               }
                             }),
-                            //this is bars between steps
                             if (index < 4)
                               Obx(() {
                                 bool isStepCompleted =
                                     controller.currentStep.value > index;
-
-                                // Special case for step 2 to 2.5 transition
                                 if (index == 2 &&
                                     controller.currentStep.value == 2.5) {
-                                  isStepCompleted =
-                                      false; // Prevent color change until fully completed
+                                  isStepCompleted = false;
                                 }
-
                                 return SizedBox(
-                                  width: 24,
+                                  width: deviceWidth *
+                                      0.045, // 6% of the screen width for spacing
                                   child: Container(
                                     height: 6,
                                     color: isStepCompleted
@@ -173,7 +177,12 @@ class CustomCard extends StatelessWidget {
                       }),
                     ),
                   ),
-                  const SizedBox(width: 4),
+                  // Adjusted width for proper spacing between steps and the divider
+                  SizedBox(
+                      width: deviceWidth *
+                          0.02), // 3% of the screen width for spacing
+
+                  // Vertical Divider (adjustable thickness)
                   const SizedBox(
                     height: 25,
                     child: VerticalDivider(
@@ -182,20 +191,30 @@ class CustomCard extends StatelessWidget {
                       width: 10,
                     ),
                   ),
-                  const SizedBox(width: 4),
-                  Obx(() => Transform(
-                        transform: Matrix4.skewX(-0.1),
-                        child: Text(
-                          '${controller.currentPercentage}%',
-                          style: const TextStyle(
-                            fontFamily: 'Barlow Semi Condensed',
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                            height: 1.2,
-                            color: Colors.white,
-                          ),
+                  // Adjusted width for spacing between the divider and percentage text
+                  SizedBox(
+                      width: deviceWidth *
+                          0.02), // 3% of the screen width for spacing
+
+                  // Percentage Text (adjust font size dynamically)
+                  Obx(() {
+                    final double deviceWidth =
+                        MediaQuery.of(context).size.width;
+                    return Transform(
+                      transform: Matrix4.skewX(-0.1),
+                      child: Text(
+                        '${controller.currentPercentage}%',
+                        style: TextStyle(
+                          fontFamily: 'Barlow Semi Condensed',
+                          fontWeight: FontWeight.w700,
+                          fontSize: deviceWidth *
+                              0.06, // 6% of screen width for font size
+                          height: 1.2,
+                          color: Colors.white,
                         ),
-                      )),
+                      ),
+                    );
+                  }),
                 ],
               ),
               ElevatedButton(
@@ -204,7 +223,7 @@ class CustomCard extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(184, 254, 34, 1),
-                  minimumSize: Size(double.infinity, deviceHeight * 0.05),
+                  minimumSize: const Size(double.infinity, 40),
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),

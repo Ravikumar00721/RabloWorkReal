@@ -32,32 +32,32 @@ class _TimeFiltersState extends State<TimeFilters> {
         itemCount: timeFilters.length,
         padding: EdgeInsets.zero, // Remove extra padding
         itemBuilder: (context, index) {
-          return ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Row(
-              crossAxisAlignment: CrossAxisAlignment.start, // Align to start
-              mainAxisAlignment:
-                  MainAxisAlignment.start, // Align items to start
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    timeFilters[index],
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'Poppins',
-                      color: Colors.white,
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                _isDropdownOpen[index] = !_isDropdownOpen[index];
+              });
+            },
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Row(
+                crossAxisAlignment: CrossAxisAlignment.start, // Align to start
+                mainAxisAlignment:
+                    MainAxisAlignment.start, // Align items to start
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      timeFilters[index],
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-                const Spacer(), // Push the arrow to the right
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _isDropdownOpen[index] = !_isDropdownOpen[index];
-                    });
-                  },
-                  child: Padding(
+                  const Spacer(), // Push the arrow to the right
+                  Padding(
                     padding: const EdgeInsets.only(right: 16),
                     child: SvgPicture.asset(
                       _isDropdownOpen[index]
@@ -68,12 +68,12 @@ class _TimeFiltersState extends State<TimeFilters> {
                       height: 7,
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
+              subtitle: _isDropdownOpen[index]
+                  ? dropdownContent(timeFilters) // Provide dropdown content
+                  : null,
             ),
-            subtitle: _isDropdownOpen[index]
-                ? dropdownContent(timeFilters) // Provide dropdown content
-                : null,
           );
         },
       ),
