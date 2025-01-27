@@ -9,7 +9,7 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CardController controller = Get.find<CardController>();
+    final CardController controller = Get.put(CardController());
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double deviceHeight = MediaQuery.of(context).size.height;
 

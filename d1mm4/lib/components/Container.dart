@@ -23,10 +23,7 @@ class NotificationContainer extends StatefulWidget {
 
 class _NotificationState extends State<NotificationContainer> {
   int _selectedItemIndex = -1; // Track the selected item index
-
-  // Initialize the DropdownController
-  final DropdownController controller =
-      Get.find(); // Get the controller instance
+  final DropdownController controller = Get.put(DropdownController());
 
   @override
   Widget build(BuildContext context) {

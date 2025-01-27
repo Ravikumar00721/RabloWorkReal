@@ -7,7 +7,6 @@ import 'package:d1mm4/components/custom_bottom_navigation_bar.dart';
 import 'package:d1mm4/components/horizontalinforbox.dart';
 import 'package:d1mm4/components/quickinfo.dart';
 import 'package:d1mm4/components/welcomebox.dart';
-import 'package:d1mm4/controllers/welcome_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,11 +17,8 @@ import 'components/Step5.dart';
 import 'components/Verification.dart';
 import 'components/hamburger.dart'; // Import Hamburger widget
 import 'components/kyc.dart';
-import 'controllers/Container_Card_controller.dart';
 
 void main() {
-  Get.put(CardController());
-  Get.put(DropdownController());
   runApp(const MyApp());
 }
 
