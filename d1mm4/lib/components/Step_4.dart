@@ -12,11 +12,8 @@ class Step4 extends StatelessWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        if (controller.currentStep.value > 0) {
-          controller.currentStep.value = (controller.currentStep.value / 2)
-              .floor() as double; // Decrement by half
-          print("Step decremented: ${controller.currentStep.value}");
-        }
+        controller.decrementStep(); // Decrement by 0.5
+        print("Step decremented: ${controller.currentStep.value}");
         return true; // Allow navigation
       },
       child: Scaffold(
@@ -42,7 +39,8 @@ class Step4 extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(200, 50),
-                  backgroundColor: const Color.fromRGBO(184, 254, 34, 1),
+                  backgroundColor:
+                      const Color.fromRGBO(184, 254, 34, 1), // Button color
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),

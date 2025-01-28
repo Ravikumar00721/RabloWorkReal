@@ -12,11 +12,8 @@ class KYC extends StatelessWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        if (controller.currentStep.value > 0) {
-          controller.currentStep.value = (controller.currentStep.value / 2)
-              .floor() as double; // Decrement by half
-          print("Step decremented: ${controller.currentStep.value}");
-        }
+        controller.decrementStep(); // Decrement by 0.5
+        print("Step decremented: ${controller.currentStep.value}");
         return true; // Allow navigation
       },
       child: Scaffold(
