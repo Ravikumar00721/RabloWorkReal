@@ -41,7 +41,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   padding: EdgeInsets.symmetric(
                       vertical: deviceHeight * (25 / 800)),
                   child: const Text(
-                    'My Plan',
+                    'My Plans',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
