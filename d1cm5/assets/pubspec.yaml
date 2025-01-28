@@ -1,4 +1,4 @@
-name: d1cm5
+name: d1mm4
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -67,26 +67,29 @@ flutter:
     - assets/step1.svg
     - assets/step2.svg
     - assets/step3.svg
-    - assets/helpandsupport.svg
+    - assets/step4.svg
+    - assets/step5.svg
     - assets/Members.svg
-    - assets/Home.svg
-    - assets/Person.svg
-    - assets/BarCode.svg
+    - assets/Globe.svg
+    - assets/Vector.svg
+    - assets/Pc.svg
+    - assets/Uparrow.svg
+    - assets/downarrow.svg
+    - assets/usercheck.svg
     - assets/exchange.svg
     - assets/locked.svg
+    - assets/profession.svg
     - assets/homeyes.svg
     - assets/personno.svg
     - assets/icon.svg
-    - assets/headphone.svg
     - assets/QuickInfo.svg
     - assets/HorizontalInforBox.svg
-    - assets/girl.png
-    - assets/Frame.png
-    - assets/Vector.svg
-    - assets/Uparrow.svg
-    - assets/downarrow.svg
     - assets/Hamburger.svg
-    - assets/Pc.svg
+    - assets/warning.svg
+    - assets/Hurray.svg
+    - assets/Frame.png
+    - assets/girl.png
+    - assets/Vector.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

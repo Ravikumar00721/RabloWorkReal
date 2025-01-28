@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -7,12 +8,15 @@ class Component3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double deviceHeight = MediaQuery.of(context).size.height;
+
     return Column(
       children: [
-        SizedBox(height: 10), // Fixed spacing
+        SizedBox(height: 10), // 10px fixed margin for top spacing
         // Divider
         Container(
-          width: 390,
+          width: deviceWidth * 0.9, // 90% of device width
           height: 2,
           decoration: BoxDecoration(
             color: const Color(0xFF2F5B6C),
@@ -22,11 +26,10 @@ class Component3 extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 8), // Fixed spacing
-        // Parent Container
+        // Parent Container with slightly reduced height
         Container(
-          width: 400,
-          height: 150, // Fixed height in pixels
+          width: deviceWidth * 1.0, // Full width of the device
+          height: deviceHeight * 0.18, // Reduced height (18% of device height)
           decoration: const BoxDecoration(
             color: Color.fromARGB(0, 85, 166, 196),
           ),
@@ -43,11 +46,13 @@ class Component3 extends StatelessWidget {
                     child: Center(
                       child: ClipRRect(
                         child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // Blur effect
+                          filter: ImageFilter.blur(
+                              sigmaX: 5.0, sigmaY: 5.0), // Reduced blur effect
                           child: SvgPicture.asset(
                             'assets/QuickInfo.svg',
-                            width: 255, // Fixed width in pixels
-                            height: 180, // Fixed height in pixels
+                            width: deviceWidth * 0.6, // 60% of device width
+                            height: deviceHeight *
+                                0.22, // Adjusted height for the first image
                           ),
                         ),
                       ),
@@ -56,7 +61,8 @@ class Component3 extends StatelessWidget {
                 ),
               ),
               // Add spacing between the two images
-              SizedBox(width: 8), // Fixed spacing in pixels
+              SizedBox(
+                  width: deviceWidth * 0.02), // 2% of device width for spacing
               // Second clickable SVG with blur
               Expanded(
                 child: GestureDetector(
@@ -68,11 +74,13 @@ class Component3 extends StatelessWidget {
                     child: Center(
                       child: ClipRRect(
                         child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // Blur effect
+                          filter: ImageFilter.blur(
+                              sigmaX: 5.0, sigmaY: 5.0), // Reduced blur effect
                           child: SvgPicture.asset(
                             'assets/QuickInfo.svg',
-                            width: 255, // Fixed width in pixels
-                            height: 180, // Fixed height in pixels
+                            width: deviceWidth * 0.6, // 60% of device width
+                            height: deviceHeight *
+                                0.22, // Adjusted height for the second image
                           ),
                         ),
                       ),

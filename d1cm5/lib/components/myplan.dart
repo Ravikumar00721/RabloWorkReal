@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/welcome_card_controller.dart';
+import '../controllers/card_controller.dart';
 
-class KYC extends StatelessWidget {
-  const KYC({super.key});
+class MyPlan extends StatelessWidget {
+  const MyPlan({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,16 +12,16 @@ class KYC extends StatelessWidget {
 
     return WillPopScope(
       onWillPop: () async {
+        // Decrement current step on back navigation
         if (controller.currentStep.value > 0) {
-          controller.currentStep.value = (controller.currentStep.value / 2)
-              .floor() as double; // Decrement by half
+          controller.currentStep.value--;
           print("Step decremented: ${controller.currentStep.value}");
         }
         return true; // Allow navigation
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("KYC"),
+          title: const Text("My Plan"),
           backgroundColor: const Color(0xFF2F5B6C),
         ),
         body: Center(
@@ -29,7 +29,7 @@ class KYC extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'KYC',
+                'My Plan',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
