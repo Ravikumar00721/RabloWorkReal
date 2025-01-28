@@ -32,6 +32,15 @@ class CardController extends GetxController {
     handleNavigation();
   }
 
+  // Decrease step by 0.5 when moving backward
+  void decrementStep() {
+    if (currentStep.value > 0) {
+      currentStep.value =
+          (currentStep.value - 0.5).clamp(0.0, 4.0); // Decrease by 0.5
+      print("Step decremented: ${currentStep.value}");
+    }
+  }
+
   // Handle navigation logic based on current step value
   void handleNavigation() {
     if (currentStep.value == 1) {
