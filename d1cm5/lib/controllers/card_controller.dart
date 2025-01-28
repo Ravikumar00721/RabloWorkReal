@@ -1,25 +1,40 @@
 import 'package:get/get.dart';
 
 class CardController extends GetxController {
-  // Observables for step data
-  var currentStep = 0.obs;
-  var stepProgress = [20, 60, 100].obs; // Updated progress percentages
-  var stepTexts = [
-    "Connect Your Buisness",
-    "Join The Membership",
-    "Scan Your First Session"
-  ].obs; // Updated steps for 3 stages
+  var currentStep = 0.obs; // Current step as an integer
 
-  // Method to change step
-  void changeStep(int step) {
-    if (step >= 0 && step <= 2) { // Adjusted for 3 steps
-      currentStep.value = step;
+  var stepProgress = [20, 60, 100].obs; // Progress values for 3 steps
+
+  var stepTexts = [
+    "Connect Your Business",
+    "Join The Memberships",
+    "Scan Your First Session",
+  ].obs;
+
+  // Change step with increments, ensuring it does not exceed 3
+  void changeStep() {
+    if (currentStep.value >= 2) {
+      print("Already at the last step, no further action needed.");
+      return;
+    }
+
+    currentStep.value++;
+    print("Current Value: ${currentStep.value}");
+    handleNavigation();
+  }
+
+  // Handle navigation logic based on current step value
+  void handleNavigation() {
+    if (currentStep.value == 0) {
+      Get.toNamed('/scan-join');
+    } else if (currentStep.value == 1) {
+      Get.toNamed('/my-plan');
     }
   }
 
-  // Get the current progress percentage
+  // Get current step progress percentage based on point value
   int get currentPercentage => stepProgress[currentStep.value];
 
-  // Get the current button text
+  // Get button text based on current step value
   String get currentButtonText => stepTexts[currentStep.value];
 }
