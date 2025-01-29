@@ -16,7 +16,7 @@ class Component3 extends StatelessWidget {
         SizedBox(height: 10), // 10px fixed margin for top spacing
         // Divider
         Container(
-          width: deviceWidth * 0.9, // 90% of device width
+          width: deviceWidth * 1.0, // 90% of device width
           height: 2,
           decoration: BoxDecoration(
             color: const Color(0xFF2F5B6C),
