@@ -13,10 +13,10 @@ class Component3 extends StatelessWidget {
 
     return Column(
       children: [
-        SizedBox(height: 10), // 10px fixed margin for top spacing
+        const SizedBox(height: 10), // 10px fixed margin for top spacing
         // Divider
         Container(
-          width: deviceWidth * 0.9, // 90% of device width
+          width: deviceWidth * 1.0, // 90% of device width
           height: 2,
           decoration: BoxDecoration(
             color: const Color(0xFF2F5B6C),
@@ -75,7 +75,7 @@ class Component3 extends StatelessWidget {
                       child: ClipRRect(
                         child: BackdropFilter(
                           filter: ImageFilter.blur(
-                              sigmaX: 5.0, sigmaY: 5.0), // Reduced blur effect
+                              sigmaX: 10, sigmaY: 10), // Reduced blur effect
                           child: SvgPicture.asset(
                             'assets/QuickInfo.svg',
                             width: deviceWidth * 0.6, // 60% of device width
