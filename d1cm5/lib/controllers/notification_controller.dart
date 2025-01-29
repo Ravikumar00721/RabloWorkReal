@@ -3,11 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DropdownController extends GetxController {
-  // Map to track the highlighted state for each filter
+class NotiDropdownController extends GetxController {
+  // Maps to track highlighted and read/unread states
   final RxMap<String, bool> highlightedFilters = <String, bool>{}.obs;
-
-  // Map to track the read/unread state for each filter
   final RxMap<String, bool> readStates = <String, bool>{}.obs;
 
   // List of time filters
@@ -21,21 +19,22 @@ class DropdownController extends GetxController {
     'Alert',
   ];
 
-  // Constructor to initialize the highlightedFilters and readStates map for each filter
-  DropdownController() {
+  // Initialize the maps
+  NotiDropdownController() {
     for (var filter in timeFilters) {
       highlightedFilters[filter] = false;
       readStates[filter] = false; // Default to unread
     }
   }
 
+  // Handle filter highlight and mark as read
   void highlightFilter(String filter) {
     if (filter == 'All') {
       // Mark all filters as highlighted and read
-      highlightedFilters.forEach((key, value) {
+      for (var key in highlightedFilters.keys) {
         highlightedFilters[key] = true;
         readStates[key] = true;
-      });
+      }
     } else {
       highlightedFilters[filter] = true;
       readStates[filter] = true;
@@ -45,10 +44,10 @@ class DropdownController extends GetxController {
     // Reset highlight and read/unread states after 4 seconds
     Timer(const Duration(seconds: 4), () {
       if (filter == 'All') {
-        highlightedFilters.forEach((key, value) {
+        for (var key in highlightedFilters.keys) {
           highlightedFilters[key] = false;
           readStates[key] = false;
-        });
+        }
       } else {
         highlightedFilters[filter] = false;
         readStates[filter] = false;
@@ -61,7 +60,6 @@ class DropdownController extends GetxController {
   String getSvgIcon(String filter) {
     switch (filter) {
       case 'Accounts Update':
-        return 'assets/usercheck.svg';
       case 'Business Update':
         return 'assets/usercheck.svg';
       case 'Memberships Update':
@@ -79,61 +77,60 @@ class DropdownController extends GetxController {
     }
   }
 
-  // Get the border color based on whether the filter is highlighted
+  // Get border color
   Color getColorProperty(String filter) {
-    if (filter == 'Alert') {
-      return highlightedFilters[filter]!
-          ? Colors.red
-          : const Color.fromRGBO(85, 166, 196, 0.3); // Green for highlight
-    }
-    return highlightedFilters[filter]!
-        ? Colors.green
-        : const Color.fromRGBO(5, 50, 43, 0.94);
+    return highlightedFilters[filter] ?? false
+        ? (filter == 'Alert' ? Colors.red : Colors.green)
+        : (filter == 'Alert'
+            ? const Color.fromRGBO(85, 166, 196, 0.3)
+            : const Color.fromRGBO(5, 50, 43, 0.94));
   }
 
-  // Get the background color based on whether the filter is highlighted
+  // Get background color
   Color getBackgroundColor(String filter) {
-    if (filter == 'Alert') {
-      return highlightedFilters[filter]!
-          ? const Color.fromRGBO(85, 166, 196, 0.3)
-          : Colors.transparent; // Always red for "Alert"
-    }
-    return highlightedFilters[filter]!
+    return highlightedFilters[filter] ?? false
         ? const Color.fromRGBO(85, 166, 196, 0.3)
         : Colors.transparent;
   }
 
-  // Get the CTA1 color for a specific filter
+  // Get CTA1 color
   Color getCta1Color(String filter) {
-    if (filter == 'Alert') {
-      return Color.fromRGBO(223, 0, 48, 1); // Always red for "Alert"
-    }
-    return const Color.fromRGBO(184, 254, 34, 1); // Default CTA1 color
+    return filter == 'Alert'
+        ? const Color.fromRGBO(223, 0, 48, 1) // Red for alerts
+        : const Color.fromRGBO(184, 254, 34, 1);
   }
 
-  // Get the read/unread text for a filter
+  // Get read/unread status
   String getReadState(String filter) {
-    return readStates[filter]! ? 'unread' : 'read';
+    return readStates[filter] ?? false ? 'unread' : 'read';
   }
 
-  // Get the color for the circular indicator
+  // Get color for the circular indicator
   Color getColorFilter(String filter) {
     switch (filter) {
       case 'Accounts Update':
       case 'Business Update':
-        return Color.fromRGBO(85, 166, 196, 1);
+        return const Color.fromRGBO(85, 166, 196, 1);
       case 'Finance and Transaction':
       case 'Memberships Update':
       case 'Customer\'s Update and Reminders':
       case 'Promotion & Offers':
         return const Color.fromRGBO(184, 254, 34, 1);
       case 'Alert':
-        return Color.fromRGBO(223, 0, 48, 1);
+        return const Color.fromRGBO(223, 0, 48, 1);
       default:
         return Colors.grey;
     }
   }
 
+  // Get color for the SVG icon inside the circular indicator
+  Color getSvgIconColor(String filter) {
+    return getColorFilter(filter) == const Color.fromRGBO(184, 254, 34, 1)
+        ? Colors.black
+        : Colors.white;
+  }
+
+  // Get text color
   Color getNameColor(String filter) {
     switch (filter) {
       case 'Finance and Transaction':

@@ -87,6 +87,10 @@ flutter:
     - assets/downarrow.svg
     - assets/Hamburger.svg
     - assets/Pc.svg
+    - assets/usercheck.svg
+    - assets/profession.svg
+    - assets/step4.svg
+    - assets/warning.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
