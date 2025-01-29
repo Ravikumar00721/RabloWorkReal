@@ -19,16 +19,18 @@ class CardController extends GetxController {
     }
 
     currentStep.value++;
-    print("Current Value: ${currentStep.value}");
+    print("Current Step Value: ${currentStep.value}");
     handleNavigation();
   }
 
   // Handle navigation logic based on current step value
   void handleNavigation() {
-    if (currentStep.value == 0) {
+    if (currentStep.value == 1) {
       Get.toNamed('/scan-join');
-    } else if (currentStep.value == 1) {
+    } else if (currentStep.value == 2) {
       Get.toNamed('/my-plan');
+    } else if (currentStep.value == 3) {
+      print("Navigation complete, staying on the last step.");
     }
   }
 
