@@ -10,6 +10,7 @@ import 'components/Progress_Lost.dart';
 import 'components/accessiblitybox.dart';
 import 'components/hamburger.dart';
 import 'components/horizontalinforbox.dart';
+import 'components/my_profile.dart';
 import 'components/quickinfo.dart';
 import 'components/welcomebox.dart';
 
@@ -30,9 +31,9 @@ class MyApp extends StatelessWidget {
       ),
       home: const HomePage(),
       getPages: [
-        GetPage(name: '/', page: () => const HomePage()),
         GetPage(name: '/scan-join', page: () => const ScanAndJoin()),
         GetPage(name: '/my-plan', page: () => const MyPlan()),
+        GetPage(name: '/my-profile', page: () => const MyProfile()),
       ],
     );
   }

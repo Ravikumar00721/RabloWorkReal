@@ -30,7 +30,7 @@ class Component2 extends StatelessWidget {
             _buildItem(
               context: context,
               index: 0,
-              text: 'My Website',
+              text: 'Support',
             ),
             _buildItem(
               context: context,
@@ -45,7 +45,7 @@ class Component2 extends StatelessWidget {
             _buildItem(
               context: context,
               index: 3,
-              text: 'Members',
+              text: 'Trainers',
             ),
           ],
         ),
@@ -71,7 +71,7 @@ class Component2 extends StatelessWidget {
         // Navigation logic based on index
         if (index == 1) {
           // Navigate to D1CM6 when "My Transactions" is clicked
-          Get.toNamed('/d1cm6');
+          Get.toNamed('/my-profile');
         }
       },
       child: Obx(() {

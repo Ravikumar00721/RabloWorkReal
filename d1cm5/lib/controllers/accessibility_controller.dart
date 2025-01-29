@@ -18,9 +18,9 @@ class AccessibilityController extends GetxController {
     if (isEnabled[index]) {
       switch (index) {
         case 0:
-          return 'assets/exchange.svg';
-        case 1:
           return 'assets/helpandsupport.svg';
+        case 1:
+          return 'assets/exchange.svg';
         case 2:
           return 'assets/step3.svg';
         case 3:
