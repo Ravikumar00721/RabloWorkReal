@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DropdownController extends GetxController {
+class NotiDropdownController extends GetxController {
   // Maps to track highlighted and read/unread states
   final RxMap<String, bool> highlightedFilters = <String, bool>{}.obs;
   final RxMap<String, bool> readStates = <String, bool>{}.obs;
@@ -20,7 +20,7 @@ class DropdownController extends GetxController {
   ];
 
   // Initialize the maps
-  DropdownController() {
+  NotiDropdownController() {
     for (var filter in timeFilters) {
       highlightedFilters[filter] = false;
       readStates[filter] = false; // Default to unread
@@ -102,7 +102,7 @@ class DropdownController extends GetxController {
 
   // Get read/unread status
   String getReadState(String filter) {
-    return readStates[filter] ?? false ? 'read' : 'unread';
+    return readStates[filter] ?? false ? 'unread' : 'read';
   }
 
   // Get color for the circular indicator

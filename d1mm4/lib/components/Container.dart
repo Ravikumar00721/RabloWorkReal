@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart'; // Import GetX
 
-import '../controllers/Container_Card_controller.dart';
+import '../controllers/Container_Card_controllerr.dart';
 import 'ContainerItem.dart';
 
 class NotificationContainer extends StatefulWidget {
@@ -23,7 +23,7 @@ class NotificationContainer extends StatefulWidget {
 
 class _NotificationState extends State<NotificationContainer> {
   int _selectedItemIndex = -1; // Track the selected item index
-  final DropdownController controller = Get.put(DropdownController());
+  final NotiDropdownController controller = Get.put(NotiDropdownController());
 
   @override
   Widget build(BuildContext context) {

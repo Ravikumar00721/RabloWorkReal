@@ -1,10 +1,10 @@
-import 'package:d1cm5/controllers/container_card_controller.dart';
+import 'package:d1cm5/controllers/notification_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 Widget dropdownContent(List<String> timeFilters) {
-  final DropdownController controller = Get.put(DropdownController());
+  final NotiDropdownController controller = Get.put(NotiDropdownController());
 
   return Obx(() {
     return Column(
