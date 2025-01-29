@@ -1,8 +1,7 @@
+import 'package:d1cm5/controllers/container_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
-import '../controllers/Container_Card_controller.dart';
 
 Widget dropdownContent(List<String> timeFilters) {
   final DropdownController controller = Get.put(DropdownController());
@@ -46,8 +45,8 @@ Widget dropdownContent(List<String> timeFilters) {
                           Row(
                             children: [
                               Container(
-                                width: 16,
-                                height: 16,
+                                width: 20,
+                                height: 20,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: controller.getColorFilter(filter),
@@ -55,9 +54,12 @@ Widget dropdownContent(List<String> timeFilters) {
                                 child: Center(
                                   child: SvgPicture.asset(
                                     controller.getSvgIcon(filter),
-                                    width: 8,
-                                    height: 8,
-                                    color: Colors.white,
+                                    width: 12, // Adjusted for better visibility
+                                    height: 12,
+                                    colorFilter: ColorFilter.mode(
+                                      controller.getSvgIconColor(filter),
+                                      BlendMode.srcIn,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -92,7 +94,10 @@ Widget dropdownContent(List<String> timeFilters) {
                             'assets/Vector.svg',
                             width: 2,
                             height: 12,
-                            color: Colors.white,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcIn,
+                            ),
                           ),
                         ],
                       ),
